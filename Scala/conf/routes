@@ -1,0 +1,11 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+GET     /shop                       controllers.ShopController.getAll
+GET     /shop/:itemId               controllers.ShopController.getById(itemId: Long)
+PUT     /shop/done/:itemId          controllers.ShopController.update(itemId: Long)
+DELETE  /shop/done                  controllers.ShopController.deleteAllDone
+DELETE  /shop/:itemId               controllers.ShopController.delete(itemId: Long)
+POST    /shop                       controllers.ShopController.add
