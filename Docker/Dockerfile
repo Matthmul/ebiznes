@@ -3,7 +3,7 @@ FROM ubuntu:${UBUNTU_TAG}
 
 LABEL maintainer="Maciej Mularski <maciej.mularski@student.uj.edu.pl>"
 
-ENV SCALA_VERSION 2.12.10
+ENV SCALA_VERSION 2.13.6
 ENV SCALA_TARBALL http://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb  
 ENV SCALA_HOME /usr/local
 
