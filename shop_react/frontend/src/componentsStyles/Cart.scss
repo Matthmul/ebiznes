@@ -1,0 +1,32 @@
+.basket {
+    .single-item-wrap {
+        border-bottom: 1px solid #000;
+        margin-bottom: 5px;
+
+        .single-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .col-left {
+                max-width: 75%;
+            }
+
+            .col-right {
+                max-width: 25%;
+                gap: 4px;
+                display: flex;
+                align-items: center;
+
+                button {
+                    padding: 4px;
+                }
+            }
+        }
+
+    }
+
+    .checkout {
+        margin-top: 15px;
+    }
+}

@@ -1,0 +1,25 @@
+.product-page {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    @media screen and (max-width:700px) {
+        flex-direction: column;
+    }
+    >div>* {
+        margin-bottom: 8px;
+    }
+
+    .product-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .col-left{
+        display: flex;
+        align-items: center;
+        .product-image {
+            max-width: 200px;
+            object-fit: cover;
+        }
+    }
+    
+}

@@ -1,0 +1,19 @@
+.products {
+    .product-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    >div>* {
+        margin-bottom: 8px;
+    }
+
+    p,
+    h2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+}
