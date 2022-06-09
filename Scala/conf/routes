@@ -3,9 +3,20 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-GET     /shop                       controllers.ShopController.getAll
-GET     /shop/:itemId               controllers.ShopController.getById(itemId: Long)
-PUT     /shop/done/:itemId          controllers.ShopController.update(itemId: Long)
-DELETE  /shop/done                  controllers.ShopController.deleteAllDone
-DELETE  /shop/:itemId               controllers.ShopController.delete(itemId: Long)
-POST    /shop                       controllers.ShopController.add
+GET     /card                       controllers.CardController.getAll
+GET     /card/:itemId               controllers.CardController.getById(itemId: Long)
+PUT     /card/done/:itemId          controllers.CardController.update(itemId: Long)
+DELETE  /card/:itemId               controllers.CardController.delete(itemId: Long)
+POST    /card                       controllers.CardController.add
+
+GET     /product                       controllers.ProductController.getAll
+GET     /product/:itemId               controllers.ProductController.getById(itemId: Long)
+PUT     /product/done/:itemId          controllers.ProductController.update(itemId: Long)
+DELETE  /product/:itemId               controllers.ProductController.delete(itemId: Long)
+POST    /product                       controllers.ProductController.add
+
+GET     /category                       controllers.CategoryController.getAll
+GET     /category/:itemId               controllers.CategoryController.getById(itemId: Long)
+PUT     /category/done/:itemId          controllers.CategoryController.update(itemId: Long)
+DELETE  /category/:itemId               controllers.CategoryController.delete(itemId: Long)
+POST    /category                       controllers.CategoryController.add
