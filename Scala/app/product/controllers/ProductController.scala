@@ -13,6 +13,7 @@ class ProductController @Inject()(cc: ControllerComponents) extends AbstractCont
   private val productList = new mutable.ListBuffer[Product]()
 
   productList += Product(1, "Chinska Zupka", 10, "Dania")
+  productList += Product(2, "Japonska Zupka", 15, "Dania")
 
   implicit val shopListJson: OFormat[Product] = Json.format[Product]
   implicit val newShopListJson: OFormat[NewProduct] = Json.format[NewProduct]
