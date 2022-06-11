@@ -2,11 +2,11 @@ import { useState, createContext, useEffect } from "react";
 import { productsHook } from "../hooks/productListHook";
 
 export const ProductListContext = createContext({
-    productsList: [],
+    productList: [],
 });
 
 export const ProductListContextProvider = ({ children }) => {
-    const [productsList, setProductsList] = useState([]);
+    const [productList, setProductsList] = useState([]);
 
     useEffect(() => {
         productsHook.fetchProducts().then((productsListData) => setProductsList(productsListData));
@@ -14,7 +14,7 @@ export const ProductListContextProvider = ({ children }) => {
 
     return (
         <ProductListContext.Provider value={{
-            productsList,
+            productList,
         }}>
             {children}
         </ProductListContext.Provider>

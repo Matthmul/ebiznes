@@ -18,7 +18,7 @@ const Payment = () => {
                     submitting,
                     pristine,
                     values,
-                    active
+                    _active
                 }) => {
                     return (
                         <form onSubmit={handleSubmit}>

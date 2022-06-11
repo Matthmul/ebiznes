@@ -4,12 +4,16 @@ import { cartHook } from "../hooks/cartHook";
 export const CartContext = createContext({
     products: [],
     addProduct: () => {
+        // Intentional empty
     },
     removeProduct: () => {
+        // Intentional empty
     },
     removeAllProducts: () => {
+        // Intentional empty
     },
     sendProductsInCart: () => {
+        // Intentional empty
     },
 });
 

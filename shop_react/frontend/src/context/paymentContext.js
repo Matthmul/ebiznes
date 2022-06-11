@@ -6,14 +6,19 @@ import Payment from 'payment'
 
 export const PaymentContext = createContext({
     handleSubmitForm: () => {
+        // Intentional empty
     },
     formatCreditCardNumber: () => {
+        // Intentional empty
     },
     formatCVC: () => {
+        // Intentional empty
     },
     formatExpirationDate: () => {
+        // Intentional empty
     },
     fieldsCorrect: () => {
+        // Intentional empty
     }
 });
 
@@ -26,8 +31,8 @@ export const PaymentContextProvider = ({ children }) => {
             (paymentStatus) => {
                 console.log(paymentStatus);
                 cartHook.sendProducts({ ...products }).then(
-                    (paymentStatus) => {
-                        console.log(paymentStatus);
+                    (cartStatus) => {
+                        console.log(cartStatus);
                     },
                     () => {
                         console.error("Błąd koszyka")
@@ -49,10 +54,7 @@ export const PaymentContextProvider = ({ children }) => {
     }
 
     const fieldsCorrect = (values) => {
-        if (!values.number || !values.name || !values.expiry || !values.cvc) {
-            return false;
-        }
-        return true;
+        return !(!values.number || !values.name || !values.expiry || !values.cvc);
     }
 
     function clearNumber(value = '') {
@@ -88,7 +90,7 @@ export const PaymentContextProvider = ({ children }) => {
         return nextValue.trim()
     }
 
-    const formatCVC = (value, prevValue, allValues = {}) => {
+    const formatCVC = (value, _prevValue, allValues = {}) => {
         const clearValue = clearNumber(value)
         let maxLength = 4
 
