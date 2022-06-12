@@ -30,31 +30,24 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
-    const sendProductsInCart = () => {
-        console.log(products);
+    const sendProductsInCart = (paymentId) => {
         if (products.length !== 0)
-            cartHook.sendProducts(...products).then(
+            cartHook.sendProducts(paymentId, ...products).then(
                 (status) => {
                     console.log(status);
                     products.length = 0
                 },
                 () => {
-                    console.error("Błąd")
-                    alert("Błąd")
+                    console.error("Błąd koszyka")
+                    alert("Błąd koszyka")
                 });
     }
 
     const removeProduct = (product) => {
         let updatedProducts = products.map((item) => {
-
             if (item.item.id === product.id) {
-                console.log(item.quantity);
-
                 item.quantity = item.quantity - 1;
-                console.log(item.quantity);
-
             }
-            console.log(item);
 
             return item;
         })

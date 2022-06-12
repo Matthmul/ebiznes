@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import { CartContext } from "./cartContext";
-import { cartHook } from "../hooks/cartHook";
 import { paymentHook } from "../hooks/paymentHook";
 import Payment from 'payment'
 
@@ -23,21 +22,13 @@ export const PaymentContext = createContext({
 });
 
 export const PaymentContextProvider = ({ children }) => {
-    const { products } = useContext(CartContext)
+    const { sendProductsInCart } = useContext(CartContext)
 
     const sendForm = (values) => {
-        let paymentValue = products.reduce((a, c) => a + c.quantity * c.item.price, 0)
-        paymentHook.sendPayment({ ...values, value: paymentValue }).then(
+        paymentHook.sendPayment({ ...values }).then(
             (paymentStatus) => {
                 console.log(paymentStatus);
-                cartHook.sendProducts({ ...products }).then(
-                    (cartStatus) => {
-                        console.log(cartStatus);
-                    },
-                    () => {
-                        console.error("Błąd koszyka")
-                        alert("Błąd koszyka")
-                    });
+                sendProductsInCart(paymentStatus.id)
             },
             () => {
                 console.error("Błąd płatności")
@@ -49,7 +40,7 @@ export const PaymentContextProvider = ({ children }) => {
         values.number = formatCreditCardNumber(values.number)
         values.cvc = formatCVC(values.cvc)
         values.expiry = formatExpirationDate(values.expiry)
-
+        
         sendForm(values)
     }
 

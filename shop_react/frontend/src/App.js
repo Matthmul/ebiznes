@@ -5,6 +5,7 @@ import Payment from './components/Payment';
 import Home from "./pages/Home";
 import CartPage from "./pages/CartPage";
 import NoPage from "./pages/NoPage";
+import FinalizeOrder from "./pages/FinalizeOrder";
 import { ProductListContextProvider } from "./context/productListContext";
 import { CartContextProvider } from "./context/cartContext";
 import { PaymentContextProvider } from "./context/paymentContext";
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/finalOrder" element={<FinalizeOrder />} />
               <Route index element={<Home />} />
               <Route path="*" element={<NoPage />} />
             </Routes>

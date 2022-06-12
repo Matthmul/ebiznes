@@ -2,7 +2,7 @@ import '../componentsStyles/Cart.scss';
 import * as React from 'react';
 import { useContext } from "react";
 import { CartContext } from "../context/cartContext";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function CartList() {
     const { products, addProduct, removeProduct, removeAllProducts } = useContext(CartContext)
@@ -38,7 +38,7 @@ function CartList() {
                     ))}
                     {products.length !== 0 && (
                         <>
-                            <p>Podsumowanie {itemsPrice} PLN</p>
+                            <p>Razem: {itemsPrice} PLN</p>
                             <Link
                                 disabled={!products.length}
                                 to="/payment">

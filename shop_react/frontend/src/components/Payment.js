@@ -3,15 +3,20 @@ import { PaymentContext } from "../context/paymentContext";
 import { useContext } from "react";
 import { Form, Field } from 'react-final-form'
 import { CartContext } from "../context/cartContext";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-    const { formatExpirationDate, formatCVC, formatCreditCardNumber, handleSubmitForm, fieldsCorrect} = useContext(PaymentContext)
+    const { formatExpirationDate, formatCVC, formatCreditCardNumber, handleSubmitForm, fieldsCorrect } = useContext(PaymentContext)
     const { products } = useContext(CartContext)
+    const navigate = useNavigate();
 
     return (
         <>
             <Form
-                onSubmit={handleSubmitForm}
+                onSubmit={(values) => {
+                    handleSubmitForm(values);
+                    // navigate('/finalOrder');
+                }}
                 render={({
                     handleSubmit,
                     form,

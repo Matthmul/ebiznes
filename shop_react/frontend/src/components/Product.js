@@ -3,7 +3,7 @@ import { CartContext } from "../context/cartContext";
 import { useContext } from "react";
 
 const Product = ({ product }) => {
-    const { addProduct } = useContext(CartContext)
+    const { products, addProduct } = useContext(CartContext)
 
     return (
         <div className="products">
