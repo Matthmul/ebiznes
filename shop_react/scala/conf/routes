@@ -26,3 +26,6 @@ GET     /payment/:itemId               payment.controllers.PaymentController.get
 PUT     /payment/update/:itemId        payment.controllers.PaymentController.update(itemId: Long)
 DELETE  /payment/:itemId               payment.controllers.PaymentController.delete(itemId: Long)
 POST    /payment                       payment.controllers.PaymentController.add()
+
+GET     /github/login-redirect      login.GithubRun.githubLogin()
+GET     /github/callback            login.GithubRun.githubCallback(code: String ?= "", state: String ?= "")

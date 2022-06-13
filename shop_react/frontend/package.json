@@ -14,8 +14,10 @@
     "axios": "^1.0.0-alpha.1",
     "sass": "^1.52.3",
     "react-icons": "^4.4.0",
+    "final-form": "^4.20.7",
     "react-final-form": "6.5.9",
-    "payment": "^2.4.2"
+    "payment": "^2.4.2",
+    "react-social-login-buttons": "^3.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

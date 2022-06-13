@@ -40,6 +40,9 @@ function Navbar() {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                    <li>
                         <Link to="/cart">Koszyk</Link>
                     </li>
                 </ul>

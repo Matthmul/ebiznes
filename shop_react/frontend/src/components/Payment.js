@@ -15,7 +15,7 @@ const Payment = () => {
             <Form
                 onSubmit={(values) => {
                     handleSubmitForm(values);
-                    // navigate('/finalOrder');
+                    navigate('/finalOrder');
                 }}
                 render={({
                     handleSubmit,
