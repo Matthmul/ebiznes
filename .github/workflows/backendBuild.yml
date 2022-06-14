@@ -18,9 +18,9 @@ jobs:
         scala: [2.13.6]
         java: [temurin@11]
     runs-on: ${{ matrix.os }}
-    # defaults:
-    #   run:
-    #     working-directory: scala
+    defaults:
+      run:
+        working-directory: Scala
     steps:
       - name: Checkout current branch (full)
         uses: actions/checkout@v2
@@ -46,8 +46,6 @@ jobs:
 
       - name: See the working dir
         run: |
-          ls -la
-          cd scala
           ls -la
 
       - name: Build project
