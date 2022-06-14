@@ -14,7 +14,7 @@ import scala.collection.mutable
 class CartController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val cartList = new mutable.ListBuffer[Cart]()
 
-  cartList += Cart(1, Array(CartItem(Product(1, "Chinska Zupka", 10, "Dania"), 1)))
+  cartList += Cart(1, 1, Array(CartItem(Product(1, "Chinska Zupka", 10, "Dania"), 1)))
 
   implicit val productJson: OFormat[Product] = Json.format[Product]
   implicit val cartItemJson: OFormat[CartItem] = Json.format[CartItem]
@@ -44,7 +44,7 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     val productListItem: Option[NewCart] = jsonObject.flatMap(Json.fromJson[NewCart](_).asOpt)
     productListItem match {
       case Some(newItem) =>
-        val toBeUpdated = Cart(itemId, newItem.items)
+        val toBeUpdated = Cart(itemId, newItem.paymentId, newItem.items)
         cartList.updated(foundItemIndex, toBeUpdated)
         Accepted(Json.toJson(toBeUpdated))
       case None =>
@@ -65,7 +65,7 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     productListItem match {
       case Some(newItem) =>
         val nextId = cartList.map(_.id).max + 1
-        val toBeAdded = Cart(nextId, newItem.items)
+        val toBeAdded = Cart(nextId, newItem.paymentId, newItem.items)
         cartList += toBeAdded
         Created(Json.toJson(toBeAdded))
       case None =>

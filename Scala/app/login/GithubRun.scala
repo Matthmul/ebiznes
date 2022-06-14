@@ -39,10 +39,9 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://github.com/"),
     redirectUri = Uri.unsafeParse(s"http://${serverConfig.host}:${serverConfig.port}/github/callback"),
-    clientId = "3c7f324665cb50d6c303",
-    clientSecret = Secret("706167e46e5e6118b162c28fe66d403f1e960a65"),
+    clientId = "",
+    clientSecret = Secret(""),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
-
 
   def githubLogin(): Action[AnyContent] = Action {
     val uri = authorizationCodeProvider.loginLink()
