@@ -10,8 +10,6 @@ ENV SCALA_HOME /usr/local
 ENV SBT_VERSION 1.6.2
 ENV SBT_TARBALL https://repo.scala-sbt.org/scalasbt/debian/sbt-$SBT_VERSION.deb
 
-WORKDIR /app
-
 RUN \
     apt-get update -y && \
     apt-get upgrade -y && \
@@ -35,10 +33,17 @@ RUN \
     apt-get clean && \  
     rm -rf /var/lib/apt/lists/*
 
-COPY ./ ./
+COPY ./target/universal/shop-1.0.zip .
+
+COPY ./conf .
+
+RUN unzip shop-1.0.zip && \
+    ls shop-1.0/bin
+
+WORKDIR /shop-1.0
 
 EXPOSE 9000
 EXPOSE 8081
 EXPOSE 8082
 
-CMD [ "sbt", "++"$SCALA_VERSION, "run",  "-Dhttp.port=8081", "-Dhttps.port=8082" ]
+CMD [ "bin/shop-1.0",  "-Dhttp.port=8081", "-Dhttps.port=8082" ]
