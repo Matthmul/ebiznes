@@ -33,14 +33,13 @@ RUN \
     apt-get clean && \  
     rm -rf /var/lib/apt/lists/*
 
-COPY ./target/universal/shop-1.0.zip .
+COPY \
+    ./target/universal/shop-1.0 .
 
-COPY ./conf .
+COPY \
+    ./conf .
 
 RUN \
-    apt-get install zip unzip
-
-RUN unzip shop-1.0.zip && \
     ls shop-1.0/bin
 
 WORKDIR /shop-1.0

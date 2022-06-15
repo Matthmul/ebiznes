@@ -49,6 +49,10 @@ jobs:
       - name: Build project
         run: sbt ++${{ matrix.scala }} dist
 
+      - uses: montudor/action-zip@v1
+        with:
+          args: unzip -qq target/universal/shop-1.0.zip -d target/universal/shop-1.0
+
       - name: Login Docker
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
