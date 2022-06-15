@@ -1,13 +1,11 @@
 package cart.controllers
 
 import cart.models.{Cart, CartItem, NewCart}
+import play.api.libs.json.{Json, OFormat}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import product.models.Product
 
-import javax.inject.Inject
-import javax.inject.Singleton
-import play.api.libs.json.{JsValue, Json, OFormat}
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
-
+import javax.inject.{Inject, Singleton}
 import scala.collection.mutable
 
 @Singleton

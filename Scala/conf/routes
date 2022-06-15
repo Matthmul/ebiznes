@@ -29,3 +29,5 @@ POST    /payment                       payment.controllers.PaymentController.add
 
 GET     /github/login-redirect      login.GithubRun.githubLogin()
 GET     /github/callback            login.GithubRun.githubCallback(code: String ?= "", state: String ?= "")
+
+GET     /logout                    logout.Logout.logoutController()

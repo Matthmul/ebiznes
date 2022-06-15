@@ -1,16 +1,45 @@
 import '../componentsStyles/Navbar.scss';
 import * as React from 'react';
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { logoutHook } from "../hooks/logoutHook";
 
-function Navbar() {
+function UserGreeting(props) {
+    return <dir className="brand-name">Witamy {props.name}!</dir>;
+}
+
+function LoginLink() {
+    return (
+        <Link to="/login">Login</Link>
+    );
+}
+
+function LogoutLink() {
+    return (
+        <Link onClick={logoutHook.redirectToLogout}>Logout</Link>
+    );
+}
+
+function Navbar(props) {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
+    const [name] = useState(
+        document.cookie.split(';').some((item) => item.trim().startsWith('username=')));
+
+    let linkLog;
+    let greetings;
+    if (props.isLoggedIn) {
+        linkLog = <LogoutLink />;
+        greetings = <UserGreeting name={name} />;
+    } else {
+        linkLog = <LoginLink />;
+    }
 
     return (
         <nav className="navigation">
             <Link to="/" className="brand-name">
                 The Shop
             </Link>
+            {greetings}
             <button
                 className="hamburger"
                 onClick={() => {
@@ -40,7 +69,7 @@ function Navbar() {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/login">Login</Link>
+                        {linkLog}
                     </li>
                     <li>
                         <Link to="/cart">Koszyk</Link>

@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from "react";
 import Navbar from './components/Navbar';
 import Payment from './components/Payment';
 import Home from "./pages/Home";
@@ -12,12 +13,15 @@ import { PaymentContextProvider } from "./context/paymentContext";
 import Login from './components/Login';
 
 function App() {
+  const [isLoggedIn] = useState(
+    document.cookie.split(';').some((item) => item.trim().startsWith('PLAY_SESSION=')));
+
   return (
     <ProductListContextProvider>
       <CartContextProvider>
         <PaymentContextProvider>
           <Router>
-            <Navbar />
+            <Navbar {...{isLoggedIn}}  />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<CartPage />} />

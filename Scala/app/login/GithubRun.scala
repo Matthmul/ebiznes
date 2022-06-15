@@ -2,7 +2,7 @@ package login
 
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCodeProvider, OAuth2TokenResponse, Secret}
 import play.api.libs.json.Json
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
 import sttp.client3.{SttpBackend, _}
 import sttp.model.Uri
 import sttp.tapir.CodecFormat.TextPlain
@@ -32,13 +32,13 @@ final case class Server(
 @Singleton
 class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
-  val serverConfig: Server = Server("https://the-shop-backend.azurewebsites.net/", 8082)
+  val serverConfig: Server = Server("the-shop-backend.azurewebsites.net", 8082)
   val github: Github = Github.instance(backend)
   val baseUri = uri"https://api.github.com/"
 
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://github.com/"),
-    redirectUri = Uri.unsafeParse(s"http://${serverConfig.host}:${serverConfig.port}/github/callback"),
+    redirectUri = Uri.unsafeParse(s"https://${serverConfig.host}:${serverConfig.port}/github/callback"),
     clientId = "3c7f324665cb50d6c303",
     clientSecret = Secret("e0ce1ef9eb2d9d6af6d9c4b5067f5a90119ef3b5"),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
@@ -54,8 +54,9 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
     val userInfo = github.userInfo(token.accessToken)
     userInfo match {
       case Some(newItem) =>
-        printf(userInfo.toString)
-        Created(Json.toJson(userInfo.toString))
+        Created(Json.toJson(newItem.toString))
+          .withCookies(Cookie("username", newItem.login))
+          .withNewSession
       case None =>
         BadRequest
     }
