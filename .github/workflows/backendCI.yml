@@ -8,6 +8,8 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
 
 jobs:
   build:
@@ -44,12 +46,14 @@ jobs:
             ~/Library/Caches/Coursier/v1
           key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
 
-      - name: Build project
+      - name: Build project and test
         run: sbt ++${{ matrix.scala }} test
 
-      - name: Compress target directories
-        run: |
-          ls -al
+      - name: Login Docker
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-      - name: Publish project
-        run: sbt ++${{ matrix.scala }} +publish
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag matthmul/java_scala_sbt:latest
+
+      - name: Docker Push
+        run: docker push matthmul/java_scala_sbt:latest
