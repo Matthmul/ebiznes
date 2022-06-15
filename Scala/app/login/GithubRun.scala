@@ -40,7 +40,7 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
     baseUrl = Uri.unsafeParse("https://github.com/"),
     redirectUri = Uri.unsafeParse(s"http://${serverConfig.host}:${serverConfig.port}/github/callback"),
     clientId = "3c7f324665cb50d6c303",
-    clientSecret = Secret(sys.env("CLIENT_SECRET_GIT")),
+    clientSecret = Secret("e0ce1ef9eb2d9d6af6d9c4b5067f5a90119ef3b5"),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
 
   def githubLogin(): Action[AnyContent] = Action {
