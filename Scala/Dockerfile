@@ -38,5 +38,7 @@ RUN \
 COPY ./ ./
 
 EXPOSE 9000
+EXPOSE 8081
+EXPOSE 8082
 
-CMD [ "sbt", "++"$SCALA_VERSION, "start" ]
+CMD [ "sbt", "++"$SCALA_VERSION, "run",  "-Dhttp.port=8081", "-Dhttps.port=8082" ]
