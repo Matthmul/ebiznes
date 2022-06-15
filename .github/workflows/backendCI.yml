@@ -47,6 +47,8 @@ jobs:
           key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
 
       - name: Build project
+        env:
+          CLIENT_SECRET_GIT: ${{ secrets.CLIENT_SECRET_GIT }}
         run: sbt ++${{ matrix.scala }} dist
 
       - name: Install zip

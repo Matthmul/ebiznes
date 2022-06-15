@@ -14,9 +14,7 @@ trait Github {
 
 final case class UserInfo(
                            id: Int,
-                           login: String,
-                           avatar_url: String,
-                           html_url: String,
+                           login: String
                          )
 
 object Github {

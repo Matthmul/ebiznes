@@ -32,15 +32,15 @@ final case class Server(
 @Singleton
 class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
-  val serverConfig: Server = Server("https://the-shop-backend.azurewebsites.net/", 9000)
+  val serverConfig: Server = Server("https://the-shop-backend.azurewebsites.net/", 8082)
   val github: Github = Github.instance(backend)
   val baseUri = uri"https://api.github.com/"
 
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://github.com/"),
     redirectUri = Uri.unsafeParse(s"http://${serverConfig.host}:${serverConfig.port}/github/callback"),
-    clientId = "",
-    clientSecret = Secret(""),
+    clientId = "3c7f324665cb50d6c303",
+    clientSecret = Secret(sys.env("CLIENT_SECRET_GIT")),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
 
   def githubLogin(): Action[AnyContent] = Action {
