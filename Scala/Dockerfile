@@ -48,4 +48,4 @@ EXPOSE 9000
 EXPOSE 8081
 EXPOSE 8082
 
-CMD [ "bin/shop-1.0",  "-Dhttp.port=8081", "-Dhttps.port=8082" ]
+CMD [ "bin/shop",  "-Dhttp.port=8081", "-Dhttps.port=8082" ]
