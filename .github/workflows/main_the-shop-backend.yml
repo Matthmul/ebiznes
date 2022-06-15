@@ -33,4 +33,4 @@ jobs:
         app-name: 'the-shop-backend'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_fa7d615dbaf6405a854aa919167711d0 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c50582e7317e427e88addeeae9cbe7c4 }}/matthmul/java_scala_sbt:latest'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c50582e7317e427e88addeeae9cbe7c4 }}/java_scala_sbt:latest'
