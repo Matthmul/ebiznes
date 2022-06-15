@@ -1,12 +1,39 @@
 name: Deploy container app to Azure Web App - the-shop
 
 on:
-  workflow_run:
-    workflows: [Continuous Integration Frontend]
-    types:
-      - completed
+  pull_request:
+    branches: ['main']
+  push:
+    branches: ['main']
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
 
 jobs:
+  build:
+    name: Build and Test
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout current branch (full)
+        uses: actions/checkout@v2
+
+      - name: Login Docker
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag matthmul/node:${{ github.sha }}
+
+      - name: Docker Push
+        run: docker push matthmul/node:${{ github.sha }}
+
   deploy:
     runs-on: ubuntu-latest
     environment:
@@ -31,6 +58,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'the-shop'
-        slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3a1e4d8f41124aa3be338e5f813456a2 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_65e0cdbeccf346b3b43a61ab086429bd }}/node:latest'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_65e0cdbeccf346b3b43a61ab086429bd }}/node:${{ github.sha }}'
