@@ -1,7 +1,7 @@
 import axios from '../config/backendConfig';
 
 const redirectToGitHubSSO = async () => {
-    axios.get("/github/login-redirect").then((githubLoginURL) => {
+    axios.get('/github/login-redirect').then((githubLoginURL) => {
         console.log(githubLoginURL.data);
         window.open(githubLoginURL.data, "_self");
     });
