@@ -26,7 +26,7 @@ RUN \
 RUN \
     curl -L -o sbt-$SBT_VERSION.deb $SBT_TARBALL && \
     dpkg -i sbt-$SBT_VERSION.deb && \
-    rm sbt-$SCALA_VERSIONSBT_VERSION.deb && \
+    rm sbt-$SBT_VERSION.deb && \
     apt-get update && \
     apt-get install sbt
 
