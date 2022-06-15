@@ -37,6 +37,9 @@ COPY ./target/universal/shop-1.0.zip .
 
 COPY ./conf .
 
+RUN \
+    apt-get install zip unzip
+
 RUN unzip shop-1.0.zip && \
     ls shop-1.0/bin
 
