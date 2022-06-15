@@ -32,7 +32,7 @@ final case class Server(
 @Singleton
 class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
-  val serverConfig: Server = Server("localhost", 9000)
+  val serverConfig: Server = Server("https://the-shop-backend.azurewebsites.net/", 9000)
   val github: Github = Github.instance(backend)
   val baseUri = uri"https://api.github.com/"
 
@@ -59,6 +59,6 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
       case None =>
         BadRequest
     }
-    Redirect("http://localhost:3000/")
+    Redirect("https://the-shop.azurewebsites.net/")
   }
 }

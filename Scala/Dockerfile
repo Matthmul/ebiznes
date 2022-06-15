@@ -39,4 +39,4 @@ COPY ./ ./
 
 EXPOSE 9000
 
-CMD [ "sbt", "++"$SCALA_VERSION, "run" ]
+CMD [ "sbt", "++"$SCALA_VERSION, "start" ]
