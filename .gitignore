@@ -30,3 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 
 logs
+log
+*.log
+
+var.env
+frontend/src/config
+frontend/cypress/plugins
+frontend/cypress/support
+frontend/cypress/videos
