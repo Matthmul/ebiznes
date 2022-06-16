@@ -21,7 +21,7 @@ function App() {
       <CartContextProvider>
         <PaymentContextProvider>
           <Router>
-            <Navbar {...{isLoggedIn}}  />
+            <Navbar {...{ isLoggedIn }} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<CartPage />} />

@@ -1,4 +1,4 @@
-package login
+package login.github
 
 import com.ocadotechnology.sttp.oauth2.common.Scope
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCodeProvider, OAuth2TokenResponse, Secret}
@@ -22,12 +22,11 @@ object AuthorizationCode {
 class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
   val github: Github = Github.instance(backend)
-  val baseUri = uri"https://api.github.com/"
 
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://github.com/"),
     redirectUri = Uri.unsafeParse(s"https://the-shop-backend.azurewebsites.net/github/callback"),
-    //    redirectUri = Uri.unsafeParse(s"http://localhost:9000/github/callback"),
+    //        redirectUri = Uri.unsafeParse(s"http://localhost:9000/github/callback"),
     clientId = "3c7f324665cb50d6c303",
     clientSecret = Secret("e0ce1ef9eb2d9d6af6d9c4b5067f5a90119ef3b5"),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
@@ -43,7 +42,7 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
     val token = authorizationCodeProvider.authCodeToToken[OAuth2TokenResponse](authCode.value)
     val userInfo = github.userInfo(token.accessToken)
 
-    //    Redirect("http://localhost:3000/")
+    //        Redirect("http://localhost:3000/")
     Redirect("https://the-shop.azurewebsites.net/")
       .withCookies(Cookie("username", userInfo.login))
       .withCookies(Cookie("email", userInfo.email))

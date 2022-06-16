@@ -10,10 +10,10 @@ const redirectToGitHubSSO = async () => {
 }
 
 const redirectToGoogleSSO = async () => {
-    // axios.get("/google/login-redirect").then((googleLoginURL) => {
-    //     console.log(googleLoginURL.data);
-    //     window.open(googleLoginURL.data, "_self");
-    // });
+    axios.get("/google/login-redirect").then((googleLoginURL) => {
+        console.log(googleLoginURL.data);
+        window.open(googleLoginURL.data, "_self");
+    });
 }
 
 export const loginHooks = {

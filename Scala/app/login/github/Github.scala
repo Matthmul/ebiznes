@@ -1,4 +1,4 @@
-package login
+package login.github
 
 import cats.implicits._
 import com.ocadotechnology.sttp.oauth2.Secret
