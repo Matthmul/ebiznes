@@ -2,6 +2,7 @@ package login.github
 
 import com.ocadotechnology.sttp.oauth2.common.Scope
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCodeProvider, OAuth2TokenResponse, Secret}
+import play.api.Configuration
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
 import sttp.client3.{SttpBackend, _}
@@ -19,16 +20,19 @@ object AuthorizationCode {
 }
 
 @Singleton
-class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class GithubRun @Inject()(cc: ControllerComponents, configuration: Configuration) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
-  val github: Github = Github.instance(backend)
+  val githubInst: Github = Github.instance(backend)
+  val redirectUri: String = configuration.get[String]("github.redirectUri")
+  val clientId: String = configuration.get[String]("github.clientId")
+  val clientSecret: String = configuration.get[String]("github.clientSecret")
+  val apiUri: String = configuration.get[String]("api.uri")
 
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://github.com/"),
-    redirectUri = Uri.unsafeParse(s"https://the-shop-backend.azurewebsites.net/github/callback"),
-    //        redirectUri = Uri.unsafeParse(s"http://localhost:9000/github/callback"),
-    clientId = "3c7f324665cb50d6c303",
-    clientSecret = Secret("e0ce1ef9eb2d9d6af6d9c4b5067f5a90119ef3b5"),
+    redirectUri = Uri.unsafeParse(s"${redirectUri}"),
+    clientId = clientId,
+    clientSecret = Secret(clientSecret),
     pathsConfig = AuthorizationCodeProvider.Config.GitHub)(backend)
 
   def githubLogin(): Action[AnyContent] = Action {
@@ -40,10 +44,9 @@ class GithubRun @Inject()(cc: ControllerComponents) extends AbstractController(c
   def githubCallback(code: String, state: String): Action[AnyContent] = Action {
     val authCode = AuthorizationCode(code)
     val token = authorizationCodeProvider.authCodeToToken[OAuth2TokenResponse](authCode.value)
-    val userInfo = github.userInfo(token.accessToken)
+    val userInfo = githubInst.userInfo(token.accessToken)
 
-    //        Redirect("http://localhost:3000/")
-    Redirect("https://the-shop.azurewebsites.net/")
+    Redirect(apiUri)
       .withCookies(Cookie("username", userInfo.login))
       .withCookies(Cookie("email", userInfo.email))
       .withSession("id" -> userInfo.id.toString)

@@ -5,10 +5,11 @@ import com.ocadotechnology.sttp.oauth2.AuthorizationCodeProvider.Config.{Path, S
 import com.ocadotechnology.sttp.oauth2.common.Scope
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCode, AuthorizationCodeProvider, OAuth2TokenResponse, Secret}
 import io.circe.Decoder
+import play.api.Configuration
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
 import sttp.client3.{SttpBackend, _}
-import sttp.model.{Uri}
+import sttp.model.Uri
 import sttp.tapir.CodecFormat.TextPlain
 import sttp.tapir._
 
@@ -30,14 +31,14 @@ object ConfigGoogle {
 }
 
 @Singleton
-class GoogleRun @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class GoogleRun @Inject()(cc: ControllerComponents, configuration: Configuration) extends AbstractController(cc) {
   val backend: SttpBackend[Identity, Any] = HttpURLConnectionBackend()
   val google: Google = Google.instance(backend)
-  val redirectUri: Uri = Uri.unsafeParse(s"https://the-shop-backend.azurewebsites.net/google/callback")
-  //  val redirectUri: Uri = Uri.unsafeParse(s"http://localhost:9000/google/callback")
-  val clientId = "995775433162-3jvtaj36rerhmgqj7bf5iqt7ms6qsgjb.apps.googleusercontent.com"
-  val clientSecret: Secret[String] = Secret("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")
+  val redirectUri: Uri = Uri.unsafeParse(s"${configuration.get[String]("google.redirectUri")}")
+  val clientId: String = configuration.get[String]("google.clientId")
+  val clientSecret: Secret[String] = Secret(configuration.get[String]("google.clientSecret"))
   val tokenUri: Uri = Uri.unsafeParse(s"https://oauth2.googleapis.com/token")
+  val apiUri: String = configuration.get[String]("api.uri")
 
   val authorizationCodeProvider: AuthorizationCodeProvider[Uri, Identity] = AuthorizationCodeProvider.uriInstance[Identity](
     baseUrl = Uri.unsafeParse("https://accounts.google.com/o/oauth2/v2/auth"),
@@ -63,8 +64,8 @@ class GoogleRun @Inject()(cc: ControllerComponents) extends AbstractController(c
     val token = authCodeToToken[OAuth2TokenResponse](authCode.value)
     val userInfo = google.userInfo(token.accessToken)
     val rg = userInfo.given_name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", " ").trim()
-    //    Redirect("http://localhost:3000/")
-    Redirect("https://the-shop.azurewebsites.net/")
+
+    Redirect(apiUri)
       .withCookies(Cookie("username", rg))
       .withCookies(Cookie("email", userInfo.email))
       .withSession("id" -> userInfo.sub)
