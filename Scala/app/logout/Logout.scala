@@ -9,6 +9,10 @@ import javax.inject.{Inject, Singleton}
 class Logout @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
   def logoutController: Action[AnyContent] = Action {
-      Ok(Json.toJson("")).discardingCookies(DiscardingCookie("PLAY_SESSION"), DiscardingCookie("username"))
+      Ok(Json.toJson("")).discardingCookies(
+        DiscardingCookie("PLAY_SESSION"),
+        DiscardingCookie("username"),
+        DiscardingCookie("email"))
+        .withNewSession
   }
 }
