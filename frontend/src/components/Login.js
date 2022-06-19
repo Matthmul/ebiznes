@@ -1,5 +1,5 @@
 import React from 'react';
-import { GithubLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import { GithubLoginButton, GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
 import { loginHooks } from "../hooks/loginHooks";
 
 function Login() {
@@ -8,6 +8,8 @@ function Login() {
             <GoogleLoginButton onClick={loginHooks.redirectToGoogleSSO} />
 
             <GithubLoginButton onClick={loginHooks.redirectToGitHubSSO} />
+
+            <FacebookLoginButton onClick={loginHooks.redirectToFacebookSSO} />
         </div>
 
     );

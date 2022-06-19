@@ -70,7 +70,10 @@ jobs:
       matrix:
         node: [ 12 ]
     needs: deploy
-
+    defaults:
+      run:
+        working-directory: frontend
+        
     steps:
     - uses: actions/checkout@v2
 
