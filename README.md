@@ -15,4 +15,4 @@
 https://the-shop.azurewebsites.net/
 
 
-[BrowserStack Tests](https://automate.browserstack.com/dashboard/v2/public-build/bGRhYjRqTllPS0tJT0ppWktBOVFnWXZHTXZ0bWwxTXlQdnZ4SVZwbThhbjNqaENMV0dVUU95SElxRDJMUXBBZVFUYmlxMGo4ZFpSbDBxcjV3WW5jQkE9PS0tTkxlQ1l6ZFJhT1JnRTNSWnZDK29QUT09--57d4c1437b8ced91a1a6d455f96a90e5a1ad6765)
+[BrowserStack Tests](https://automate.browserstack.com/dashboard/v2/public-build/TnlVdkhadlR6bmlWOHA5TkFtU0twdktRVkJyUnZJY2VKVFNaM1BEY3dBZUcrRWtMYWdFRjczRHNNb0UzQ1FzWGNYb2hhOFFVVEhUSWlTbzJpQ2lTb0E9PS0tTWZ6SlBJcUREVFNoSm9KQXRyeEVlQT09--dc87c8ca46afd60fe10b2efb7a8b6b00bae59135)
