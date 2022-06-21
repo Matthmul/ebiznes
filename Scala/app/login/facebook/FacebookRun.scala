@@ -75,8 +75,8 @@ class FacebookRun @Inject()(cc: ControllerComponents, configuration: Configurati
         val rg = userInfo.name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", "").trim()
 
         Redirect(apiUri)
-          .withCookies(Cookie("username", rg))
-          .withCookies(Cookie("email", userInfo.email))
+          .withCookies(Cookie("username", rg),
+            Cookie("email", userInfo.email))
           .withSession("id" -> userInfo.id)
       }
     }

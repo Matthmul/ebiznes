@@ -21,8 +21,16 @@ const redirectToFacebookSSO = async () => {
     });
 }
 
+const redirectToDiscordSSO = async () => {
+    axios.get("/discord/login-redirect").then((discordLoginURL) => {
+        console.log(discordLoginURL.data);
+        window.open(discordLoginURL.data, "_self");
+    });
+}
+
 export const loginHooks = {
     redirectToGitHubSSO,
     redirectToGoogleSSO,
-    redirectToFacebookSSO
+    redirectToFacebookSSO,
+    redirectToDiscordSSO
 }

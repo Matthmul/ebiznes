@@ -84,10 +84,10 @@ jobs:
 
     - run: npm install -g browserstack-cypress-cli
 
-    - name: Sleep for 5 minutes
+    - name: Sleep for 400 sec
       uses: jakejarvis/wait-action@master
       with:
-        time: '300s'
+        time: '400s'
 
     - name: Run browserstack tests
       run: browserstack-cypress run --sync -u $BROWSERSTACK_USERNAME -k $BROWSERSTACK_ACCESS_KEY

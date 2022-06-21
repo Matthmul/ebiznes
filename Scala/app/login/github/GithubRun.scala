@@ -47,8 +47,8 @@ class GithubRun @Inject()(cc: ControllerComponents, configuration: Configuration
     val userInfo = githubInst.userInfo(token.accessToken)
 
     Redirect(apiUri)
-      .withCookies(Cookie("username", userInfo.login))
-      .withCookies(Cookie("email", userInfo.email))
+      .withCookies(Cookie("username", userInfo.login),
+        Cookie("email", userInfo.email))
       .withSession("id" -> userInfo.id.toString)
   }
 }

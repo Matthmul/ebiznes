@@ -36,4 +36,7 @@ GET     /google/callback            login.google.GoogleRun.googleCallback(code: 
 GET     /facebook/login-redirect      login.facebook.FacebookRun.facebookLogin()
 GET     /facebook/callback            login.facebook.FacebookRun.facebookCallback(code: String ?= "", state: String ?= "", error ?= "")
 
+GET     /discord/login-redirect      login.discord.DiscordRun.discordLogin()
+GET     /discord/callback            login.discord.DiscordRun.discordCallback(code: String ?= "", state: String ?= "", error ?= "")
+
 GET     /logout                    logout.Logout.logoutController()
