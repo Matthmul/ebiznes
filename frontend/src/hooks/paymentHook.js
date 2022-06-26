@@ -1,9 +1,7 @@
 import axios from '../config/backendConfig';
 
-function sendPayment(payment) {
-    console.log(payment)
-
-    return axios.post('/payment', payment).then((res) =>{
+function sendPayment(id, price) {
+    return axios.post('/payment',  {creditCardTokenId: id, value: price}).then((res) =>{
         return res.data;
     });
 }

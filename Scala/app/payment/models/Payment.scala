@@ -1,3 +1,3 @@
 package payment.models
 
-case class Payment(id: Long, number: String, name: String, expiry: String, cvc: String)
+case class Payment(id: Long, value: Int, proceed: String)

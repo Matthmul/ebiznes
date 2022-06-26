@@ -23,8 +23,6 @@ POST    /category                       category.controllers.CategoryController.
 
 GET     /payment                       payment.controllers.PaymentController.getAll()
 GET     /payment/:itemId               payment.controllers.PaymentController.getById(itemId: Long)
-PUT     /payment/update/:itemId        payment.controllers.PaymentController.update(itemId: Long)
-DELETE  /payment/:itemId               payment.controllers.PaymentController.delete(itemId: Long)
 POST    /payment                       payment.controllers.PaymentController.add()
 
 GET     /github/login-redirect      login.github.GithubRun.githubLogin()
