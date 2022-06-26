@@ -8,6 +8,7 @@ import io.circe.Decoder
 import login.facebook.Facebook.checkPermissions
 import play.api.Configuration
 import play.api.libs.json.Json
+import play.api.mvc.Cookie.SameSite
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
 import sttp.client3.{SttpBackend, _}
 import sttp.model.Uri
@@ -75,8 +76,8 @@ class FacebookRun @Inject()(cc: ControllerComponents, configuration: Configurati
         val rg = userInfo.name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", "").trim()
 
         Redirect(apiUri)
-          .withCookies(Cookie("username", rg),
-            Cookie("email", userInfo.email))
+          .withCookies(Cookie("username", rg, httpOnly = false, sameSite = Option(SameSite.Lax)),
+            Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.Lax)))
           .withSession("id" -> userInfo.id)
       }
     }

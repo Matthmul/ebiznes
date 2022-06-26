@@ -1,7 +1,10 @@
 import axios from '../config/backendConfig';
 
-const redirectToLogout = async () => {
-    await axios.get('/logout');
+const redirectToLogout = () => {
+    axios.get('/logout').then((logoutURL) => {
+        console.log(logoutURL.data);
+        window.open(logoutURL.data, "_self");
+    });
 }
 
 export const logoutHook = {

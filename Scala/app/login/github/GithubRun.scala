@@ -4,6 +4,7 @@ import com.ocadotechnology.sttp.oauth2.common.Scope
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCodeProvider, OAuth2TokenResponse, Secret}
 import play.api.Configuration
 import play.api.libs.json.Json
+import play.api.mvc.Cookie.SameSite
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
 import sttp.client3.{SttpBackend, _}
 import sttp.model.Uri
@@ -47,8 +48,8 @@ class GithubRun @Inject()(cc: ControllerComponents, configuration: Configuration
     val userInfo = githubInst.userInfo(token.accessToken)
 
     Redirect(apiUri)
-      .withCookies(Cookie("username", userInfo.login),
-        Cookie("email", userInfo.email))
+      .withCookies(Cookie("username", userInfo.login, httpOnly = false, sameSite = Option(SameSite.Lax)),
+        Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.Lax)))
       .withSession("id" -> userInfo.id.toString)
   }
 }

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { logoutHook } from "../hooks/logoutHook";
+import { useCookies } from 'react-cookie';
 
 function UserGreeting(props) {
     return <dir className="brand-name">Witamy {props.name}!</dir>;
@@ -16,20 +17,19 @@ function LoginLink() {
 
 function LogoutLink() {
     return (
-        <Link onClick={logoutHook.redirectToLogout}>Logout</Link>
+        <Link to="/" onClick={logoutHook.redirectToLogout}>Logout</Link>
     );
 }
 
 function Navbar(props) {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
-    const [name] = useState(
-        document.cookie.split(';').some((item) => item.trim().startsWith('username=')));
+    const [cookies] = useCookies(['username']);
 
     let linkLog;
     let greetings;
     if (props.isLoggedIn) {
         linkLog = <LogoutLink />;
-        greetings = <UserGreeting name={name} />;
+        greetings = <UserGreeting name={cookies.username} />;
     } else {
         linkLog = <LoginLink />;
     }

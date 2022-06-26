@@ -12,6 +12,7 @@ import sttp.model.{Header, HeaderNames, Uri}
 import sttp.tapir.CodecFormat.TextPlain
 import sttp.tapir._
 import cats.implicits._
+import play.api.mvc.Cookie.SameSite
 import sttp.client3.circe.asJson
 
 import javax.inject.{Inject, Singleton}
@@ -95,8 +96,8 @@ class DiscordRun @Inject()(cc: ControllerComponents, configuration: Configuratio
       val userInfo = discord.userInfo(token.accessToken)
 
       Redirect(apiUri)
-        .withCookies(Cookie("username", userInfo.username),
-          Cookie("email", userInfo.email))
+        .withCookies(Cookie("username", userInfo.username, httpOnly = false, sameSite = Option(SameSite.Lax)),
+          Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.Lax)))
         .withSession("id" -> userInfo.id)
     }
   }

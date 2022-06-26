@@ -9,10 +9,11 @@ import NoPage from "./pages/NoPage";
 import { ProductListContextProvider } from "./context/productListContext";
 import { CartContextProvider } from "./context/cartContext";
 import Login from './components/Login';
+import { useCookies } from 'react-cookie';
 
 function App() {
-  const [isLoggedIn] = useState(
-    document.cookie.split(';').some((item) => item.trim().startsWith('PLAY_SESSION=')));
+  const [cookies] = useCookies(['username']);
+  const [isLoggedIn] = useState(cookies.username);
 
   return (
     <ProductListContextProvider>

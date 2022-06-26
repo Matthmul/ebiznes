@@ -38,3 +38,4 @@ GET     /discord/login-redirect      login.discord.DiscordRun.discordLogin()
 GET     /discord/callback            login.discord.DiscordRun.discordCallback(code: String ?= "", state: String ?= "", error ?= "")
 
 GET     /logout                    logout.Logout.logoutController()
+GET     /logoutCallback            logout.Logout.logoutCallback()
