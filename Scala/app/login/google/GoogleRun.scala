@@ -67,8 +67,8 @@ class GoogleRun @Inject()(cc: ControllerComponents, configuration: Configuration
     val rg = userInfo.given_name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", " ").trim()
 
     Redirect(apiUri)
-      .withCookies(Cookie("username", rg, domain = Option("the-shop.azurewebsites.net"), httpOnly = false, sameSite = Option(SameSite.Lax)),
-        Cookie("email", userInfo.email, domain = Option("the-shop.azurewebsites.net"), httpOnly = false, sameSite = Option(SameSite.Lax)))
+      .withCookies(Cookie("username", rg, httpOnly = false, sameSite = Option(SameSite.Lax)),
+        Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.Lax)))
       .withSession("id" -> userInfo.sub)
   }
 }
