@@ -79,4 +79,28 @@ class PaymentController @Inject()(cc: ControllerComponents, configuration: Confi
         BadRequest
     }
   }
+
+  def update(itemId: Long): Action[AnyContent] = Action { implicit request =>
+    val content = request.body
+    val jsonObject = content.asJson
+
+    val foundItemIndex = paymentList.indexWhere(_.id == itemId)
+    if (foundItemIndex == -1)
+      BadRequest
+
+    val productListItem: Option[NewPayment] = jsonObject.flatMap(Json.fromJson[NewPayment](_).asOpt)
+    productListItem match {
+      case Some(newItem) =>
+        val toBeUpdated = Payment(itemId, newItem.value, paymentList(foundItemIndex).paymentId)
+        paymentList.updated(foundItemIndex, toBeUpdated)
+        Accepted(Json.toJson(toBeUpdated))
+      case None =>
+        BadRequest
+    }
+  }
+
+  def delete(itemId: Long): Action[AnyContent] = Action {
+    paymentList.filterInPlace(_.id != itemId)
+    Accepted
+  }
 }

@@ -1,0 +1,29 @@
+.single-item-wrap {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    margin-top: 20px;
+
+    .single-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .col-left {
+            max-width: 50%;
+        }
+
+        .col-right {
+            max-width: 50%;
+            display: flex;
+            align-items: center;
+
+            button {
+                padding: 4px;
+            }
+        }
+    }
+    
+    .single-item-bottom {
+        margin-bottom: 5px;
+    }
+}

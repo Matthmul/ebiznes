@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { paymentHook } from "../hooks/paymentHook";
 import { CartContext } from "../context/cartContext";
-import FinalizeOrder from "../pages/FinalizeOrder";
+import FinalizeOrder from "../components/FinalizeOrder";
+import Typography from '@mui/material/Typography';
 
 const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -62,19 +63,19 @@ const PaymentForm = () => {
     return (
         <>
             {!success ?
-                <div>
+                <div className="payment">
+                    <Typography variant="h4" className='tittle'>Proszę wypełnić poniższe dane</Typography>
                     <form onSubmit={(values) => {
                         handleSubmitForm(values, itemsPrice)
                     }}>
-                        <fieldset className="FormGroup">
-                            <div className="FormRow">
+                        <fieldset className="form-group">
+                            <div className="form-row">
                                 <CardElement options={CARD_OPTIONS} />
                             </div>
                         </fieldset>
-                        <button>Zapłać</button>
+                        <button className="payment">Zapłać</button>
                     </form>
-                    <h2>Do zapłaty</h2>
-                    <pre>{itemsPrice} PLN</pre>
+                    <Typography variant="h5" className='summary'>Do zapłaty {itemsPrice} PLN</Typography>
                 </div>
                 :
                 <FinalizeOrder />

@@ -1,25 +1,23 @@
-.product-page {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    @media screen and (max-width:700px) {
-        flex-direction: column;
-    }
-    >div>* {
-        margin-bottom: 8px;
+.products {
+    .list {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        margin: auto;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
-    .product-buttons {
-        display: flex;
-        justify-content: space-between;
+    .tittle {
+        display: block;
+        margin: auto;
+        margin-top: 15px;
+        text-align: center;
     }
-    .col-left{
-        display: flex;
-        align-items: center;
-        .product-image {
-            max-width: 200px;
-            object-fit: cover;
-        }
+
+    @media screen and (max-width:500px) {
+        flex-direction: column;
     }
-    
 }

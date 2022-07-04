@@ -1,0 +1,20 @@
+.final-payment {
+    .tittle {
+        margin: 15px 10px;
+    }
+
+    .back {
+        margin: 5px;
+        color: rgb(4, 0, 255);
+    }
+
+    .single-item-ordered {
+        border-bottom: 1px solid #000;
+        margin: 15px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

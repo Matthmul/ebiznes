@@ -24,6 +24,14 @@ POST    /category                       category.controllers.CategoryController.
 GET     /payment                       payment.controllers.PaymentController.getAll()
 GET     /payment/:itemId               payment.controllers.PaymentController.getById(itemId: Long)
 POST    /payment                       payment.controllers.PaymentController.add()
+PUT     /payment/update/:itemId        payment.controllers.PaymentController.update(itemId: Long)
+DELETE  /payment/:itemId               payment.controllers.PaymentController.delete(itemId: Long)
+
+GET     /sale                       sale.controllers.SaleController.getAll()
+GET     /sale/:itemId               sale.controllers.SaleController.getById(itemId: Long)
+PUT     /sale/update/:itemId        sale.controllers.SaleController.update(itemId: Long)
+DELETE  /sale/:itemId               sale.controllers.SaleController.delete(itemId: Long)
+POST    /sale                       sale.controllers.SaleController.add()
 
 GET     /github/login-redirect      login.github.GithubRun.githubLogin()
 GET     /github/callback            login.github.GithubRun.githubCallback(code: String ?= "", state: String ?= "")

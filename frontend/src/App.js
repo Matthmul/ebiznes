@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from "react";
 import Navbar from './components/Navbar';
 import Payment from './components/Payment';
+import Cart from './components/Cart';
 import Home from "./pages/Home";
-import CartPage from "./pages/CartPage";
 import NoPage from "./pages/NoPage";
 import { ProductListContextProvider } from "./context/productListContext";
 import { CartContextProvider } from "./context/cartContext";
 import Login from './components/Login';
 import { useCookies } from 'react-cookie';
+import Product from './components/Product';
 
 function App() {
   const [cookies] = useCookies(['username']);
@@ -22,9 +23,10 @@ function App() {
           <Navbar {...{ isLoggedIn }} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<CartPage />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/product" element={<Product />} />
             <Route index element={<Home />} />
             <Route path="*" element={<NoPage />} />
           </Routes>

@@ -1,0 +1,16 @@
+.login {
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    
+    .tittle {
+        text-align: center;
+    }
+
+    .button {
+        margin: 10px;
+    }
+}

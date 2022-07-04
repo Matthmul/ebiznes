@@ -1,5 +1,27 @@
-.products {
-    .product-buttons {
+.product {
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+
+    .description {
+        display: flex;
+        justify-content: space-between;
+        color: rgb(78, 72, 19);
+    }
+
+    .price {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .button {
         display: flex;
         justify-content: space-between;
     }
@@ -7,13 +29,4 @@
     >div>* {
         margin-bottom: 8px;
     }
-
-    p,
-    h2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
 }
