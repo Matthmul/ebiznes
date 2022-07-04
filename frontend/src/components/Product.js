@@ -14,6 +14,7 @@ const Product = ({ product }) => {
             <Typography variant="h6" className='price'>{`${product.price} zł`}</Typography>
             <div className='button'>
                 <IconButton color="primary" variant="contained" aria-label="Add to shopping cart"
+                    className='add-button'
                     onClick={() => addProduct(product)}>
                     <ShoppingCartIcon />
                     Dodaj do koszyka

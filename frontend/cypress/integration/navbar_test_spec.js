@@ -11,10 +11,6 @@ describe('Navbar', function () {
         cy.get('.brand-name').should('have.text', 'The Shop')
     })
 
-    it('Should have hamburger button', function () {
-        cy.get('.hamburger').should('have.length', 1)
-    })
-
     it('Should have navigation menu', function () {
         cy.get('.navigation-menu').should('have.length', 1)
     })
