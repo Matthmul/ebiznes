@@ -95,8 +95,8 @@ class DiscordRun @Inject()(cc: ControllerComponents, configuration: Configuratio
       val userInfo = discord.userInfo(token.accessToken)
 
       Redirect(apiUri)
-        .withCookies(Cookie("username", userInfo.username, httpOnly = false, sameSite = Option(SameSite.Lax)),
-          Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.Lax)))
+        .withCookies(Cookie("username", userInfo.username, httpOnly = false, sameSite = Option(SameSite.None)),
+          Cookie("email", userInfo.email, httpOnly = false, sameSite = Option(SameSite.None)))
         .withSession("id" -> userInfo.id)
     }
   }
