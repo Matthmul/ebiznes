@@ -33,8 +33,8 @@ const PaymentForm = () => {
     const { products } = useContext(CartContext)
     const itemsPrice = products.reduce((a, c) => a + c.quantity * c.item.price, 0);
 
-    const sendForm = async (values, itemsPrice) => {
-        paymentHook.sendPayment(values, itemsPrice).then(
+    const sendForm = async (values) => {
+        paymentHook.sendPayment(values, itemsPrice * 100).then(
             (paymentStatus) => {
                 console.log(paymentStatus);
                 sendProductsInCart(paymentStatus.id)
@@ -46,7 +46,7 @@ const PaymentForm = () => {
             });
     };
 
-    const handleSubmitForm = async (values, itemsPrice) => {
+    const handleSubmitForm = async (values) => {
         values.preventDefault()
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
@@ -56,7 +56,7 @@ const PaymentForm = () => {
         if (!error) {
             const { id } = paymentMethod
 
-            sendForm(id, itemsPrice * 100)
+            sendForm(id)
         }
     }
 
@@ -66,7 +66,7 @@ const PaymentForm = () => {
                 <div className="payment">
                     <Typography variant="h4" className='tittle'>Proszę wypełnić poniższe dane</Typography>
                     <form onSubmit={(values) => {
-                        handleSubmitForm(values, itemsPrice)
+                        handleSubmitForm(values)
                     }}>
                         <fieldset className="form-group">
                             <div className="form-row">

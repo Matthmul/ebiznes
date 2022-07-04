@@ -9,7 +9,7 @@ case class FacebookTokenResponse(
                                   accessToken: Secret[String],
                                   tokenType: String,
                                   expiresIn: Option[FiniteDuration],
-                                  auth_type: Option[String]
+                                  authType: Option[String]
                                 ) extends OAuth2TokenResponse.Basic
 
 object FacebookTokenResponse {

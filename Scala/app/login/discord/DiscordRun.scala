@@ -59,8 +59,7 @@ class DiscordRun @Inject()(cc: ControllerComponents, configuration: Configuratio
   private def tokenRequestParams(authCode: String,
                                  redirectUri: String,
                                  clientId: String,
-                                 clientSecret: Secret[String],
-                                 scopes: String) =
+                                 clientSecret: Secret[String]) =
     Map(
       "code" -> authCode,
       "grant_type" -> "client_credentials",
@@ -82,7 +81,7 @@ class DiscordRun @Inject()(cc: ControllerComponents, configuration: Configuratio
             .post(tokenUri)
             .headers(
               Header(HeaderNames.ContentType, "application/x-www-form-urlencoded;charset=UTF-8"))
-            .body(tokenRequestParams(authCode.value, redirectUri.toString(), clientId, clientSecret, scopes.toString()))
+            .body(tokenRequestParams(authCode.value, redirectUri.toString(), clientId, clientSecret))
             .response(asJson[DiscordTokenResponse])
         }
         .map { response =>
