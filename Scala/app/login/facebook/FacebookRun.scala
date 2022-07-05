@@ -75,7 +75,7 @@ class FacebookRun @Inject()(cc: ControllerComponents, configuration: Configurati
         val userInfo = facebook.userInfo(token.accessToken)
         val rg = userInfo.name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", "").trim()
 
-        Redirect(apiUri)
+        Redirect(apiUri + "login?username=" + rg + "&email=" + userInfo.email)
           .withCookies(Cookie("username", rg, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)),
             Cookie("email", userInfo.email, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)))
           .withSession("id" -> userInfo.id)

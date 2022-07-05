@@ -47,7 +47,7 @@ class GithubRun @Inject()(cc: ControllerComponents, configuration: Configuration
     val token = authorizationCodeProvider.authCodeToToken[OAuth2TokenResponse](authCode.value)
     val userInfo = githubInst.userInfo(token.accessToken)
 
-    Redirect(apiUri)
+    Redirect(apiUri + "login?username=" + userInfo.login + "&email=" + userInfo.email)
       .withCookies(Cookie("username", userInfo.login, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)),
         Cookie("email", userInfo.email, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)))
       .withSession("id" -> userInfo.id.toString)
