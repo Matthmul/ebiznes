@@ -4,7 +4,7 @@ describe('Product List', function () {
     })
 
     it('Should be visible', function () {
-        cy.get('.product').should('have.length', 1);
+        cy.get('.products').should('have.length', 1);
     });
 
     it('Product should contain name, price add button', function () {
@@ -13,8 +13,8 @@ describe('Product List', function () {
         cy.get('.button').first().should('have.length', 1);
     })
 
-    it('Should contain 2 elements', function () {
-        cy.get('.products').should('have.length', 2);
+    it('Should contain 5 elements', function () {
+        cy.get('.product').should('have.length', 5);
     })
 
     describe('Click Add Button', function () {
@@ -27,7 +27,7 @@ describe('Product List', function () {
                 .should('have.text', 'Chinska Zupka');
             cy.get(".single-item-bottom")
                 .should('have.text', "1 x 10 PLN");
-            cy.get(".summary(2)")
+            cy.get(".summary").eq(1)
                 .should('have.text', "Razem: 10 PLN");
         })
 
@@ -42,7 +42,7 @@ describe('Product List', function () {
                     .should('have.text', 'Chinska Zupka');
                 cy.get(".single-item-bottom")
                     .should('have.text', "2 x 10 PLN");
-                cy.get(".summary(2)")
+                cy.get(".summary").eq(1)
                     .should('have.text', "Razem: 20 PLN");
             })
         })

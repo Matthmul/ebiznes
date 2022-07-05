@@ -28,6 +28,4 @@ log
 *.log
 
 .env
-frontend/cypress/plugins
-frontend/cypress/support
 frontend/cypress/videos
