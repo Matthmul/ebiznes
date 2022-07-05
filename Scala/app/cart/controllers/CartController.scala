@@ -12,7 +12,7 @@ import scala.collection.mutable
 class CartController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val cartList = new mutable.ListBuffer[Cart]()
 
-  cartList += Cart(1, 1, Array(CartItem(Product(1, "Chinska Zupka", 10, "Dania"), 1)))
+  cartList += Cart(1, 1, Array(CartItem(Product(1, "", 1, 1), 1)))
 
   implicit val productJson: OFormat[Product] = Json.format[Product]
   implicit val cartItemJson: OFormat[CartItem] = Json.format[CartItem]

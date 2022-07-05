@@ -11,6 +11,7 @@ POST    /cart                       cart.controllers.CartController.add()
 
 GET     /product                       product.controllers.ProductController.getAll()
 GET     /product/:itemId               product.controllers.ProductController.getById(itemId: Long)
+GET     /product/category/:itemId      product.controllers.ProductController.getByCategory(itemId: Long)
 PUT     /product/update/:itemId        product.controllers.ProductController.update(itemId: Long)
 DELETE  /product/:itemId               product.controllers.ProductController.delete(itemId: Long)
 POST    /product                       product.controllers.ProductController.add()

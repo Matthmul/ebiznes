@@ -12,8 +12,11 @@ import scala.collection.mutable
 class ProductController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val productList = new mutable.ListBuffer[Product]()
 
-  productList += Product(1, "Chinska Zupka", 10, "Dania")
-  productList += Product(2, "Japonska Zupka", 15, "Dania")
+  productList += Product(1, "Chińska zupka", 10, 1)
+  productList += Product(2, "Japońska zupka", 15, 1)
+  productList += Product(3, "Kimchi", 25, 2)
+  productList += Product(4, "Banchan", 30, 2)
+  productList += Product(5, "Herbata jujuba", 30, 3)
 
   implicit val shopListJson: OFormat[Product] = Json.format[Product]
   implicit val newShopListJson: OFormat[NewProduct] = Json.format[NewProduct]
@@ -28,6 +31,11 @@ class ProductController @Inject()(cc: ControllerComponents) extends AbstractCont
       case Some(item) => Ok(Json.toJson(item))
       case None => NotFound
     }
+  }
+
+  def getByCategory(itemId: Long): Action[AnyContent] = Action {
+    val productCategoryList = productList.filter(_.category == itemId)
+    if (productCategoryList.isEmpty) NotFound else Ok(Json.toJson(productCategoryList))
   }
 
   def update(itemId: Long): Action[AnyContent] = Action { implicit request =>

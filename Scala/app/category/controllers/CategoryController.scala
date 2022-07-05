@@ -12,7 +12,9 @@ import scala.collection.mutable
 class CategoryController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val categoryList = new mutable.ListBuffer[Category]()
 
-  categoryList += Category(1, "Dania")
+  categoryList += Category(1, "Zupy")
+  categoryList += Category(2, "Dania")
+  categoryList += Category(3, "Napoje")
 
   implicit val categoryListJson: OFormat[Category] = Json.format[Category]
   implicit val newCategoryListJson: OFormat[NewCategory] = Json.format[NewCategory]

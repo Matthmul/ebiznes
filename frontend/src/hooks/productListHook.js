@@ -7,6 +7,14 @@ async function fetchProducts() {
     return responseJson;
 }
 
+async function fetchProductsByCategory(category) {
+    const fullResponse = await axios.get('/product/category/' + category);
+    const responseJson = fullResponse.data;
+    console.log(responseJson);
+    return responseJson;
+}
+
 export const productsHook = {
     fetchProducts,
+    fetchProductsByCategory,
 }
