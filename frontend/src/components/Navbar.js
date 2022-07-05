@@ -1,7 +1,6 @@
 import '../componentsStyles/Navbar.scss';
 import * as React from 'react';
 import { Link } from "react-router-dom";
-import { logoutHook } from "../hooks/logoutHook";
 import { useCookies } from 'react-cookie';
 
 function UserGreeting(props) {
@@ -16,7 +15,7 @@ function LoginLink() {
 
 function LogoutLink() {
     return (
-        <Link to="/" onClick={logoutHook.redirectToLogout}>Logout</Link>
+        <Link to="/logout">Logout</Link>
     );
 }
 

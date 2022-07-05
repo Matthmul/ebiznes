@@ -9,12 +9,13 @@ import NoPage from "./pages/NoPage";
 import { ProductListContextProvider } from "./context/productListContext";
 import { CartContextProvider } from "./context/cartContext";
 import Login from './components/Login';
+import Logout from './components/Logout';
 import { useCookies } from 'react-cookie';
 import Product from './components/Product';
 
 function App() {
   const [cookies] = useCookies(['username']);
-  const [isLoggedIn] = useState(cookies.username);
+  const [isLoggedIn, setIsLoggedIn] = useState(cookies.username);
 
   return (
     <ProductListContextProvider>
@@ -25,7 +26,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login {...{ isLoggedIn, setIsLoggedIn }} />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/product" element={<Product />} />
             <Route index element={<Home />} />
             <Route path="*" element={<NoPage />} />
