@@ -1,6 +1,5 @@
 import '../componentsStyles/Product.scss';
 import { CartContext } from "../context/cartContext";
-import { ProductListContext } from "../context/productListContext";
 import { useContext } from "react";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -8,7 +7,6 @@ import Typography from '@mui/material/Typography';
 
 const Product = ({ product }) => {
     const { addProduct } = useContext(CartContext)
-    const { saleList } = useContext(ProductListContext)
 
     return (
         <div className="product">

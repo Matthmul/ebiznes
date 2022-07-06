@@ -29,7 +29,7 @@ export const ProductListContextProvider = ({ children }) => {
     function setProductsListWithSale(productsListData) {
         salesHook.fetchSales().then((saleData) => {
             const saleMap = saleData.reduce((map, item) =>
-                map.set(item.itemId, item.discount), new Map);
+                map.set(item.itemId, item.discount), new Map());
             const result = productsListData.map((item) => (Object.assign({
                 discount: saleMap.get(item.id)
             }, item)));
