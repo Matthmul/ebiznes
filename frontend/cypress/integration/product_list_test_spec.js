@@ -24,7 +24,7 @@ describe('Product List', function () {
             cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
             cy.get('.cart').should('have.length', 1);
             cy.get(".col-left").first()
-                .should('have.text', 'Chinska Zupka');
+                .should('have.text', 'Chińska Zupka');
             cy.get(".single-item-bottom")
                 .should('have.text', "1 x 10 PLN");
             cy.get(".summary").eq(1)
@@ -39,7 +39,7 @@ describe('Product List', function () {
                 cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
                 cy.get('.cart').should('have.length', 1);
                 cy.get(".col-left").first()
-                    .should('have.text', 'Chinska Zupka');
+                    .should('have.text', 'Chińska Zupka');
                 cy.get(".single-item-bottom")
                     .should('have.text', "2 x 10 PLN");
                 cy.get(".summary").eq(1)

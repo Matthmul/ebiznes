@@ -24,8 +24,8 @@ describe('Shopping Card', function () {
         cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
     })
 
-    it('Should not be empty', function () {
-        cy.get(".tittle").eq(1).should('not.have.text', 'Koszyk jest pusty');
+    it('Should have summary', function () {
+        cy.get(".tittle").first().should('have.text', 'Podsumowanie:');
     });
 
     it('Button should not be disabled', function () {
