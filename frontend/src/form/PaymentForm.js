@@ -31,7 +31,7 @@ const PaymentForm = () => {
     const stripe = useStripe()
     const elements = useElements()
     const { products } = useContext(CartContext)
-    const itemsPrice = products.reduce((a, c) => a + c.quantity * c.item.price, 0);
+    const itemsPrice = products.reduce((a, c) => a + c.quantity * (c.item.discount ? c.item.discount : c.item.price), 0);
 
     const sendForm = async (values) => {
         paymentHook.sendPayment(values, itemsPrice * 100).then(

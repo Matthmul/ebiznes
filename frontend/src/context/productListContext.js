@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { productsHook } from "../hooks/productListHook";
+import { salesHook } from "../hooks/saleHook";
 
 export const ProductListContext = createContext({
     productList: [],
@@ -15,15 +16,26 @@ export const ProductListContextProvider = ({ children }) => {
     useEffect(() => {
         if (selectedCategory === -1) {
             productsHook.fetchProducts().then((productsListData) => {
-                setProductsList(productsListData)
+                setProductsListWithSale(productsListData)
             })
         }
         else {
             productsHook.fetchProductsByCategory(selectedCategory).then((productsListData) => {
-                setProductsList(productsListData)
+                setProductsListWithSale(productsListData)
             })
         }
     }, [selectedCategory])
+
+    function setProductsListWithSale(productsListData) {
+        salesHook.fetchSales().then((saleData) => {
+            const saleMap = saleData.reduce((map, item) =>
+                map.set(item.itemId, item.discount), new Map);
+            const result = productsListData.map((item) => (Object.assign({
+                discount: saleMap.get(item.id)
+            }, item)));
+            setProductsList(result)
+        })
+    }
 
     return (
         <ProductListContext.Provider value={{

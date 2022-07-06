@@ -19,6 +19,21 @@
         margin: auto;
         margin-top: 10px;
         margin-bottom: 10px;
+
+        .old-price {
+            display: block;
+            justify-content: center;
+            margin: auto;
+            color: rgb(255, 0, 0);
+            text-decoration: line-through;
+        }
+
+        .new-price {
+            display: block;
+            justify-content: center;
+            margin: auto;
+            margin-left: 10px;
+        }
     }
 
     .button {

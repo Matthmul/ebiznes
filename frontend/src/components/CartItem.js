@@ -28,7 +28,7 @@ const CartItem = ({ product }) => {
                 </ButtonGroup>
             </div>
             <Typography className="single-item-bottom">
-                {product.quantity} x {product.item.price} PLN
+                {product.quantity} x {(product.item.discount ? product.item.discount : product.item.price)} PLN
             </Typography>
         </div>
     )

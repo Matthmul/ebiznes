@@ -12,7 +12,8 @@ import scala.collection.mutable
 class SaleController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val saleList = new mutable.ListBuffer[Sale]()
 
-  saleList += Sale(1, 1, 1.0)
+  saleList += Sale(1, 2, 10)
+  saleList += Sale(1, 5, 27)
 
   implicit val productJson: OFormat[Product] = Json.format[Product]
   implicit val saleListJson: OFormat[Sale] = Json.format[Sale]

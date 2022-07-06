@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 function Cart() {
     const { products } = useContext(CartContext)
-    const itemsPrice = products.reduce((a, c) => a + c.quantity * c.item.price, 0);
-    let navigate = useNavigate(); 
+    const itemsPrice = products.reduce((a, c) => a + c.quantity * (c.item.discount ? c.item.discount : c.item.price), 0);
+    let navigate = useNavigate();
 
     return (
         <div className="cart">
