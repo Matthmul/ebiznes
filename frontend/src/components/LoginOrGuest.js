@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
-function LoginOrGuest(props) {
+function LoginOrGuest() {
     let navigate = useNavigate();
 
     return (

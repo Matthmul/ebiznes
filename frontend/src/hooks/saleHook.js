@@ -2,8 +2,7 @@ import axios from '../config/backendConfig';
 
 async function fetchSales() {
     const fullResponse = await axios.get('/sale');
-    const responseJson = fullResponse.data;
-    return responseJson;
+    return fullResponse.data;
 }
 
 export const salesHook = {

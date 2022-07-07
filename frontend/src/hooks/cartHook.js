@@ -2,8 +2,8 @@ import axios from '../config/backendConfig';
 
 function sendProducts(paymentId, ...cart) {
     console.log(cart)
-    return axios.post('/cart', { 
-        paymentId: paymentId, items: cart 
+    return axios.post('/cart', {
+        paymentId: paymentId, items: cart
     }, {
         withCredentials: true,
     }).then((res) => {
@@ -19,10 +19,9 @@ async function fetchCartHistoryByUser() {
             withCredentials: true
         });
         responseJson = fullResponse.data;
+        return responseJson;
     } catch (err) {
         console.error(err.response.status);
-    } finally {
-        return responseJson;
     }
 }
 
