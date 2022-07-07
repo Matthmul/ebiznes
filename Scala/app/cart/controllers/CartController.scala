@@ -1,8 +1,10 @@
 package cart.controllers
 
 import cart.models.{Cart, CartItem, NewCart}
+import payment.controllers.PaymentController
 import play.api.libs.json.{Json, OFormat}
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
+import play.mvc.Http
 import product.models.Product
 
 import javax.inject.{Inject, Singleton}
@@ -12,7 +14,7 @@ import scala.collection.mutable
 class CartController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val cartList = new mutable.ListBuffer[Cart]()
 
-  cartList += Cart(1, 1, Array(CartItem(Product(1, "", 1, 1), 1)))
+  cartList += Cart(1, 1, "", Array(CartItem(Product(1, "", 1, 1), 1)))
 
   implicit val productJson: OFormat[Product] = Json.format[Product]
   implicit val cartItemJson: OFormat[CartItem] = Json.format[CartItem]
@@ -31,6 +33,20 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
+  def getByUser: Action[AnyContent] = Action { implicit request =>
+    printf(request.session.toString)
+
+    request.session
+      .get("connected")
+      .map { email =>
+        val cartUserList = cartList.filter(_.email == email)
+        if (cartUserList.isEmpty) NoContent else Ok(Json.toJson(cartUserList))
+      }
+      .getOrElse {
+        Unauthorized("Oops, you are not connected")
+      }
+  }
+
   def update(itemId: Long): Action[AnyContent] = Action { implicit request =>
     val content = request.body
     val jsonObject = content.asJson
@@ -42,9 +58,18 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     val productListItem: Option[NewCart] = jsonObject.flatMap(Json.fromJson[NewCart](_).asOpt)
     productListItem match {
       case Some(newItem) =>
-        val toBeUpdated = Cart(itemId, newItem.paymentId, newItem.items)
-        cartList.updated(foundItemIndex, toBeUpdated)
-        Accepted(Json.toJson(toBeUpdated))
+        request.session
+          .get("connected")
+          .map { email =>
+            val toBeUpdated = Cart(itemId, newItem.paymentId, email, newItem.items)
+            cartList.updated(foundItemIndex, toBeUpdated)
+            Accepted(Json.toJson(toBeUpdated))
+          }
+          .getOrElse {
+            val toBeUpdated = Cart(itemId, newItem.paymentId, "", newItem.items)
+            cartList.updated(foundItemIndex, toBeUpdated)
+            Accepted(Json.toJson(toBeUpdated))
+          }
       case None =>
         BadRequest
     }
@@ -63,9 +88,19 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     productListItem match {
       case Some(newItem) =>
         val nextId = cartList.map(_.id).max + 1
-        val toBeAdded = Cart(nextId, newItem.paymentId, newItem.items)
-        cartList += toBeAdded
-        Created(Json.toJson(toBeAdded))
+        printf(request.session.toString)
+        request.session
+          .get("connected")
+          .map { email =>
+            val toBeAdded = Cart(nextId, newItem.paymentId, email, newItem.items)
+            cartList += toBeAdded
+            Created(Json.toJson(toBeAdded))
+          }
+          .getOrElse {
+            val toBeAdded = Cart(nextId, newItem.paymentId, "", newItem.items)
+            cartList += toBeAdded
+            Created(Json.toJson(toBeAdded))
+          }
       case None =>
         BadRequest
     }

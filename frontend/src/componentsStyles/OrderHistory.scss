@@ -1,0 +1,26 @@
+.order-history {
+    margin-left: 10px;
+    .tittle {
+        margin: 15px 0px;
+    }
+
+    .single-item-ordered {
+        border-bottom: 1px solid #000;
+        border-top: 1px solid #000;
+        margin-bottom: 5px;
+        margin-top: 15px;
+        padding: 5px 0px;
+
+        .order-num {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .order-col {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 function UserGreeting(props) {
-    return <dir className="brand-name">Witamy {props.name}!</dir>;
+    return <Link to="/" className="brand-name">Witamy {props.name}!</Link>;
 }
 
 function LoginLink() {
@@ -43,6 +43,14 @@ function Navbar(props) {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
+                    {
+                        props.isLoggedIn ?
+                            <li>
+                                <Link to="/orderHistory">Historia</Link>
+                            </li>
+                            :
+                            <></>
+                    }
                     <li>
                         {linkLog}
                     </li>

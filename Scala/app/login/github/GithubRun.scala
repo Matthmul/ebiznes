@@ -50,6 +50,6 @@ class GithubRun @Inject()(cc: ControllerComponents, configuration: Configuration
     Redirect(apiUri + "login?username=" + userInfo.login + "&email=" + userInfo.email)
       .withCookies(Cookie("username", userInfo.login, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)),
         Cookie("email", userInfo.email, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)))
-      .withSession("id" -> userInfo.id.toString)
+      .withSession("connected" -> userInfo.email)
   }
 }

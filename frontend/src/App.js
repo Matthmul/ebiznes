@@ -13,6 +13,7 @@ import Logout from './components/Logout';
 import { useCookies } from 'react-cookie';
 import Product from './components/Product';
 import LoginOrGuest from './components/LoginOrGuest';
+import OrderHistory from './components/OrderHistory';
 
 function App() {
   const [cookies] = useCookies(['username']);
@@ -25,12 +26,13 @@ function App() {
           <Navbar {...{ isLoggedIn }} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart {...{ isLoggedIn }} />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/login" element={<Login {...{ isLoggedIn, setIsLoggedIn }} />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/product" element={<Product />} />
             <Route path="/loginOrGuest" element={<LoginOrGuest />} />
+            <Route path="/orderHistory" element={<OrderHistory />} />
             <Route index element={<Home />} />
             <Route path="*" element={<NoPage />} />
           </Routes>

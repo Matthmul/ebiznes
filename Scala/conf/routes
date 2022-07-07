@@ -4,9 +4,11 @@
 # ~~~~
 
 GET     /cart                       cart.controllers.CartController.getAll()
+GET     /cart/user                  cart.controllers.CartController.getByUser()
 GET     /cart/:itemId               cart.controllers.CartController.getById(itemId: Long)
 PUT     /cart/update/:itemId        cart.controllers.CartController.update(itemId: Long)
 DELETE  /cart/:itemId               cart.controllers.CartController.delete(itemId: Long)
++ nocsrf
 POST    /cart                       cart.controllers.CartController.add()
 
 GET     /product                       product.controllers.ProductController.getAll()

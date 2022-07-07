@@ -78,7 +78,7 @@ class FacebookRun @Inject()(cc: ControllerComponents, configuration: Configurati
         Redirect(apiUri + "login?username=" + rg + "&email=" + userInfo.email)
           .withCookies(Cookie("username", rg, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)),
             Cookie("email", userInfo.email, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)))
-          .withSession("id" -> userInfo.id)
+          .withSession("connected" -> userInfo.email)
       }
     }
   }

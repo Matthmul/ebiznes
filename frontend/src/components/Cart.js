@@ -7,7 +7,7 @@ import CartItem from './CartItem';
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Cart() {
+function Cart(props) {
     const { products } = useContext(CartContext)
     const itemsPrice = products.reduce((a, c) => a + c.quantity * (c.item.discount ? c.item.discount : c.item.price), 0);
     let navigate = useNavigate();
@@ -26,7 +26,7 @@ function Cart() {
                         <Typography variant="h6" className='summary'>Razem: {itemsPrice} PLN</Typography>
                         <Button className='pay'
                             disabled={!products.length}
-                            onClick={() => navigate("/loginOrGuest")}>
+                            onClick={() => props.isLoggedIn ? navigate("/payment") : navigate("/loginOrGuest")}>
                             Przejdź do płatności
                         </Button>
                     </>
