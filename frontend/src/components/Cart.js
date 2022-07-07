@@ -26,7 +26,7 @@ function Cart() {
                         <Typography variant="h6" className='summary'>Razem: {itemsPrice} PLN</Typography>
                         <Button className='pay'
                             disabled={!products.length}
-                            onClick={() => navigate("/payment")}>
+                            onClick={() => navigate("/loginOrGuest")}>
                             Przejdź do płatności
                         </Button>
                     </>

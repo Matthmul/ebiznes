@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import { useCookies } from 'react-cookie';
 import Product from './components/Product';
+import LoginOrGuest from './components/LoginOrGuest';
 
 function App() {
   const [cookies] = useCookies(['username']);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login {...{ isLoggedIn, setIsLoggedIn }} />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/product" element={<Product />} />
+            <Route path="/loginOrGuest" element={<LoginOrGuest />} />
             <Route index element={<Home />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
