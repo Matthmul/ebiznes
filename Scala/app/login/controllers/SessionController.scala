@@ -8,6 +8,8 @@ import scala.collection.mutable
 import scala.util.Random
 
 trait SessionController {
+  def getAll: mutable.Seq[Session]
+
   def getByToken(token: String): Session
 
   def delete(token: String): Unit
@@ -25,6 +27,10 @@ object SessionController {
 
   def generateToken(): String = {
     Random.alphanumeric.take(25).mkString
+  }
+
+  def getAll: mutable.Seq[Session] = {
+    sessionList
   }
 
   def getByToken(token: String): Session = {
