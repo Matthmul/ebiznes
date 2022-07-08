@@ -28,7 +28,8 @@
     "@mui/icons-material": "^5.8.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "cypress-plugin-stripe-elements": "^1.0.2"
+    "cypress-plugin-stripe-elements": "^1.0.2",
+    "react-hook-form": "^7.33.1"
   },
   "scripts": {
     "start": "react-scripts start",

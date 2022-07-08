@@ -26,8 +26,8 @@ function Cart(props) {
                         <Typography variant="h6" className='summary'>Razem: {itemsPrice} PLN</Typography>
                         <Button className='pay'
                             disabled={!products.length}
-                            onClick={() => props.isLoggedIn ? navigate("/payment") : navigate("/loginOrGuest")}>
-                            Przejdź do płatności
+                            onClick={() => props.isLoggedIn ? navigate("/delivery") : navigate("/loginOrGuest")}>
+                            Przejdź do kasy
                         </Button>
                     </>
                 )}

@@ -36,6 +36,12 @@ PUT     /sale/update/:itemId        sale.controllers.SaleController.update(itemI
 DELETE  /sale/:itemId               sale.controllers.SaleController.delete(itemId: Long)
 POST    /sale                       sale.controllers.SaleController.add()
 
+GET     /address                       address.controllers.AddressController.getAll()
+GET     /address/:itemId               address.controllers.AddressController.getById(itemId: Long)
+PUT     /address/update/:itemId        address.controllers.AddressController.update(itemId: Long)
+DELETE  /address/:itemId               address.controllers.AddressController.delete(itemId: Long)
+POST    /address                       address.controllers.AddressController.add()
+
 GET     /github/login-redirect      login.github.GithubRun.githubLogin()
 GET     /github/callback            login.github.GithubRun.githubCallback(code: String ?= "", state: String ?= "")
 

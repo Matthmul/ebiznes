@@ -14,6 +14,7 @@ import { useCookies } from 'react-cookie';
 import Product from './components/Product';
 import LoginOrGuest from './components/LoginOrGuest';
 import OrderHistory from './components/OrderHistory';
+import Delivery from './components/Delivery';
 
 function App() {
   const [cookies] = useCookies(['username']);
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart {...{ isLoggedIn }} />} />
+            <Route path="/delivery" element={<Delivery />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/login" element={<Login {...{ isLoggedIn, setIsLoggedIn }} />} />
             <Route path="/logout" element={<Logout />} />

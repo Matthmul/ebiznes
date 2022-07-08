@@ -25,7 +25,7 @@ function LoginOrGuest() {
             </div>
             <div className='guest'>
                 <Typography variant="h4" className='tittle'>Kup jako gość</Typography>
-                <Button className="button" variant='contained' onClick={() => navigate("/payment")}>
+                <Button className="button" variant='contained' onClick={() => navigate("/delivery")}>
                     Zapłać
                 </Button>
             </div>
