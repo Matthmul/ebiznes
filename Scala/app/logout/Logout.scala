@@ -13,19 +13,21 @@ class Logout @Inject()(cc: ControllerComponents, configuration: Configuration) e
 
   def logoutController: Action[AnyContent] = Action { request =>
     val baseUri =
-      if(request.secure)
+      if (request.secure)
         Uri.unsafeParse("https://" + request.host + "/logoutCallback")
       else
         Uri.unsafeParse("http://" + request.host + "/logoutCallback")
+
+    request.session
+      .get("token")
+      .foreach { token =>
+        login.controllers.SessionController.delete(token)
+      }
     Accepted(Json.toJson(baseUri.toString()))
   }
 
   def logoutCallback: Action[AnyContent] = Action {
     Redirect(apiUri)
-      .discardingCookies(
-        DiscardingCookie("username"),
-        DiscardingCookie("email"))
-      .withNewSession
       .withHeaders("Location" -> apiUri)
   }
 }

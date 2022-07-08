@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import Typography from '@mui/material/Typography';
 
 const OrderHistory = () => {
-    const [userCartHistory, setUserCartHistory] = useState([]);
+    const [userCartHistory, setUserCartHistory] = useState(null);
     const [cookies] = useCookies(['username']);
 
     useEffect(() => {

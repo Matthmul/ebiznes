@@ -1,19 +1,18 @@
 package login.discord
 
+import cats.implicits._
 import com.ocadotechnology.sttp.oauth2.AuthorizationCodeProvider.Config
 import com.ocadotechnology.sttp.oauth2.AuthorizationCodeProvider.Config.{Path, Segment}
 import com.ocadotechnology.sttp.oauth2.common.Scope
 import com.ocadotechnology.sttp.oauth2.{AuthorizationCodeProvider, Secret}
 import play.api.Configuration
 import play.api.libs.json.Json
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
+import sttp.client3.circe.asJson
 import sttp.client3.{SttpBackend, _}
 import sttp.model.{Header, HeaderNames, Uri}
 import sttp.tapir.CodecFormat.TextPlain
 import sttp.tapir._
-import cats.implicits._
-import play.api.mvc.Cookie.SameSite
-import sttp.client3.circe.asJson
 
 import javax.inject.{Inject, Singleton}
 
@@ -94,10 +93,8 @@ class DiscordRun @Inject()(cc: ControllerComponents, configuration: Configuratio
         }
       val userInfo = discord.userInfo(token.accessToken)
 
-      Redirect(apiUri + "login?username=" + userInfo.username + "&email=" + userInfo.email)
-        .withCookies(Cookie("username", userInfo.username, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)),
-          Cookie("email", userInfo.email, secure = true, httpOnly = false, sameSite = Option(SameSite.Lax)))
-        .withSession("connected" -> userInfo.email)
+      val session  = login.controllers.SessionController.add(userInfo.email)
+      Redirect(apiUri + "login?username=" + userInfo.username + "&token=" + session.token)
     }
   }
 }

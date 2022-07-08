@@ -7,8 +7,7 @@ import com.ocadotechnology.sttp.oauth2.{AuthorizationCode, AuthorizationCodeProv
 import io.circe.Decoder
 import play.api.Configuration
 import play.api.libs.json.Json
-import play.api.mvc.Cookie.SameSite
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Cookie}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import sttp.client3.{SttpBackend, _}
 import sttp.model.Uri
 import sttp.tapir.CodecFormat.TextPlain
@@ -66,8 +65,7 @@ class GoogleRun @Inject()(cc: ControllerComponents, configuration: Configuration
     val userInfo = google.userInfo(token.accessToken)
     val rg = userInfo.given_name.stripMargin('|').replaceAll("[^a-zA-Z0-9]", " ").trim()
 
-    Redirect(apiUri + "login?username=" + rg + "&email=" + userInfo.email)
-      .withCookies(Cookie("email", userInfo.email, sameSite = Option(SameSite.Lax)))
-      .withSession("connected" -> userInfo.email)
+    val session  = login.controllers.SessionController.add(userInfo.email)
+    Redirect(apiUri + "login?username=" + rg + "&token=" + session.token)
   }
 }

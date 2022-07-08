@@ -13,7 +13,7 @@ function Login(props) {
     useEffect(() => {
         if (searchParams.get("username")) {
             setCookie("username", searchParams.get("username"))
-            setCookie("email", searchParams.get("email"))
+            setCookie("token", searchParams.get("token"))
             props.setIsLoggedIn(true)
         }
     }, [searchParams, setCookie, props])

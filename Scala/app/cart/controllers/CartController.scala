@@ -34,16 +34,19 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def getByUser: Action[AnyContent] = Action { implicit request =>
-    printf(request.session.toString)
-
-    request.session
-      .get("connected")
-      .map { email =>
-        val cartUserList = cartList.filter(_.email == email)
-        if (cartUserList.isEmpty) NoContent else Ok(Json.toJson(cartUserList))
+    request.cookies
+      .get("token")
+      .map { token =>
+        val session = login.controllers.SessionController.getByToken(token.value)
+        if (session.id == -1) {
+          NoContent
+        } else {
+          val cartUserList = cartList.filter(_.email == session.email)
+          if (cartUserList.isEmpty) NoContent else Ok(Json.toJson(cartUserList))
+        }
       }
       .getOrElse {
-        Unauthorized("Oops, you are not connected")
+        Unauthorized
       }
   }
 
@@ -58,12 +61,17 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     val productListItem: Option[NewCart] = jsonObject.flatMap(Json.fromJson[NewCart](_).asOpt)
     productListItem match {
       case Some(newItem) =>
-        request.session
-          .get("connected")
-          .map { email =>
-            val toBeUpdated = Cart(itemId, newItem.paymentId, email, newItem.items)
-            cartList.updated(foundItemIndex, toBeUpdated)
-            Accepted(Json.toJson(toBeUpdated))
+        request.cookies
+          .get("token")
+          .map { token =>
+            val session = login.controllers.SessionController.getByToken(token.value)
+            if (session.id == -1) {
+              Unauthorized
+            } else {
+              val toBeUpdated = Cart(itemId, newItem.paymentId, session.email, newItem.items)
+              cartList.updated(foundItemIndex, toBeUpdated)
+              Accepted(Json.toJson(toBeUpdated))
+            }
           }
           .getOrElse {
             val toBeUpdated = Cart(itemId, newItem.paymentId, "", newItem.items)
@@ -88,11 +96,11 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     productListItem match {
       case Some(newItem) =>
         val nextId = cartList.map(_.id).max + 1
-        printf(request.session.toString)
-        request.session
-          .get("connected")
-          .map { email =>
-            val toBeAdded = Cart(nextId, newItem.paymentId, email, newItem.items)
+        request.cookies
+          .get("token")
+          .map { token =>
+            val session = login.controllers.SessionController.getByToken(token.value)
+            val toBeAdded = Cart(nextId, newItem.paymentId, session.email, newItem.items)
             cartList += toBeAdded
             Created(Json.toJson(toBeAdded))
           }

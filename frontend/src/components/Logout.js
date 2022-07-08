@@ -7,7 +7,7 @@ function Logout() {
 
     useEffect(() => {
         removeCookie("username");
-        removeCookie("email");
+        removeCookie("token");
         logoutHook.redirectToLogout();
     }, [removeCookie])
 }
