@@ -3,13 +3,13 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-GET     /cart                       cart.controllers.CartController.getAll()
-GET     /cart/user                  cart.controllers.CartController.getByUser()
-GET     /cart/:itemId               cart.controllers.CartController.getById(itemId: Long)
-PUT     /cart/update/:itemId        cart.controllers.CartController.update(itemId: Long)
-DELETE  /cart/:itemId               cart.controllers.CartController.delete(itemId: Long)
+GET     /cart                           cart.controllers.CartController.getAll()
+GET     /cart/user/:token               cart.controllers.CartController.getByUser(token: String)
+GET     /cart/:itemId                   cart.controllers.CartController.getById(itemId: Long)
+PUT     /cart/update/:itemId/token      cart.controllers.CartController.update(itemId: Long, token: String)
+DELETE  /cart/:itemId                   cart.controllers.CartController.delete(itemId: Long)
 + nocsrf
-POST    /cart                       cart.controllers.CartController.add()
+POST    /cart/:token                    cart.controllers.CartController.add(token: String)
 
 GET     /product                       product.controllers.ProductController.getAll()
 GET     /product/:itemId               product.controllers.ProductController.getById(itemId: Long)

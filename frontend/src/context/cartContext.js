@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { cartHook } from "../hooks/cartHook";
+import { useCookies } from 'react-cookie';
 
 export const CartContext = createContext({
     products: [],
@@ -19,16 +20,18 @@ export const CartContext = createContext({
 
 export const CartContextProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
+    const [cookies] = useCookies(['token']);
 
     useEffect(() => {
-        let parsedProducts = products
-        if (products.length === 0)
-        {
-            let savedProducts = localStorage.getItem("products");
-            parsedProducts = checkZeroQuantity(JSON.parse(savedProducts));
-            setProducts(checkZeroQuantity(parsedProducts));
+        let productsToSet = products
+        if (products.length === 0) {
+            const savedProducts = localStorage.getItem("products");
+            if (savedProducts && JSON.parse(savedProducts).length) {
+                productsToSet = checkZeroQuantity(JSON.parse(savedProducts));
+                setProducts(productsToSet);
+            }
         }
-        localStorage.setItem("products", JSON.stringify(parsedProducts));
+        localStorage.setItem("products", JSON.stringify(productsToSet));
     }, [products]);
 
     const addProduct = (newProduct) => {
@@ -43,7 +46,7 @@ export const CartContextProvider = ({ children }) => {
 
     const sendProductsInCart = (paymentId) => {
         if (products.length !== 0)
-            cartHook.sendProducts(paymentId, ...products).then(
+            cartHook.sendProducts(cookies.token, paymentId, ...products).then(
                 (status) => {
                     console.log(status);
                     products.length = 0

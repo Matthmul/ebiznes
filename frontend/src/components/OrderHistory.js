@@ -7,14 +7,14 @@ import Typography from '@mui/material/Typography';
 
 const OrderHistory = () => {
     const [userCartHistory, setUserCartHistory] = useState(null);
-    const [cookies] = useCookies(['username']);
+    const [cookies] = useCookies([]);
 
     useEffect(() => {
         if (cookies.username)
-            cartHook.fetchCartHistoryByUser().then((userCartHistoryData) => {
+            cartHook.fetchCartHistoryByUser(cookies.token).then((userCartHistoryData) => {
                 setUserCartHistory(userCartHistoryData);
             })
-    }, [cookies.username])
+    }, [cookies])
 
     return (
         <div className="order-history">

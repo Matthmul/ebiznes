@@ -1,23 +1,19 @@
 import axios from '../config/backendConfig';
 
-function sendProducts(paymentId, ...cart) {
+function sendProducts(token, paymentId, ...cart) {
     console.log(cart)
-    return axios.post('/cart', {
+    return axios.post('/cart/' + token, {
         paymentId: paymentId, items: cart
-    }, {
-        withCredentials: true,
     }).then((res) => {
         return res.data;
     });
 }
 
-async function fetchCartHistoryByUser() {
+async function fetchCartHistoryByUser(token) {
     let fullResponse = null;
     let responseJson = null;
     try {
-        fullResponse = await axios.get('/cart/user', {
-            withCredentials: true
-        });
+        fullResponse = await axios.get('/cart/user/' + token);
         responseJson = fullResponse.data;
         return responseJson;
     } catch (err) {
