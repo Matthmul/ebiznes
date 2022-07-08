@@ -13,7 +13,7 @@ function LoginOrGuest() {
         <div className='loginOrGuest'>
             <div className='login'>
                 <Typography variant="h4" className='tittle'>Zaloguj się</Typography>
-                <div className="button">
+                <div className="login-buttons">
                     <GoogleLoginButton onClick={loginHooks.redirectToGoogleSSO} />
 
                     <GithubLoginButton onClick={loginHooks.redirectToGitHubSSO} />

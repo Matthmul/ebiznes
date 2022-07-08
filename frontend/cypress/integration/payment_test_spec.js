@@ -4,6 +4,7 @@ describe('Payment', function() {
         cy.get(".add-button").first().click();
         cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
         cy.get(".pay").click()
+        cy.get(".button").click()
     });
 
     it('Should have text', function() {
