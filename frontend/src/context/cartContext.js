@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { cartHook } from "../hooks/cartHook";
 
 export const CartContext = createContext({
@@ -20,6 +20,17 @@ export const CartContext = createContext({
 export const CartContextProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
 
+    useEffect(() => {
+        let parsedProducts = products
+        if (products.length === 0)
+        {
+            let savedProducts = localStorage.getItem("products");
+            parsedProducts = checkZeroQuantity(JSON.parse(savedProducts));
+            setProducts(checkZeroQuantity(parsedProducts));
+        }
+        localStorage.setItem("products", JSON.stringify(parsedProducts));
+    }, [products]);
+
     const addProduct = (newProduct) => {
         let productInCart = products.findIndex((product) => product.item.id === newProduct.id);
         if (productInCart !== -1) {
@@ -36,6 +47,7 @@ export const CartContextProvider = ({ children }) => {
                 (status) => {
                     console.log(status);
                     products.length = 0
+                    localStorage.setItem("products", []);
                 },
                 () => {
                     console.error("Błąd koszyka")
@@ -53,6 +65,7 @@ export const CartContextProvider = ({ children }) => {
         })
 
         setProducts(checkZeroQuantity(updatedProducts));
+        localStorage.setItem("products", JSON.stringify(checkZeroQuantity(updatedProducts)));
     }
 
     function checkZeroQuantity(productsQuantity) {
@@ -69,6 +82,7 @@ export const CartContextProvider = ({ children }) => {
         })
 
         setProducts(checkZeroQuantity(updatedProducts));
+        localStorage.setItem("products", JSON.stringify(checkZeroQuantity(updatedProducts)));
     }
 
 
