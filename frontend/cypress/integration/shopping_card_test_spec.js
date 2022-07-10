@@ -37,9 +37,9 @@ describe('Shopping Card', function () {
             .should('have.text', 'Razem: 10 PLN')
     });
 
-    it('Click "Przejdź do płatności" herf open page with payment form', function () {
+    it('Click "Przejdź do kasy" herf open page with payment form', function () {
         cy.get(".pay")
-            .should('have.text', 'Przejdź do płatności')
+            .should('have.text', 'Przejdź do kasy')
 
         cy.get(".pay").click()
     })

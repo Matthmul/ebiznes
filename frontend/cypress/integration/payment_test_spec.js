@@ -5,6 +5,10 @@ describe('Payment', function() {
         cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
         cy.get(".pay").click()
         cy.get(".button").click()
+        cy.get('input[name="street"]').type('Adama Mickiewicza')
+        cy.get('input[name="number"]').type('1234')
+        cy.get('input[name="postalCode"]').type('33333')
+        cy.get('.submitButton "]').click()
     });
 
     it('Should have text', function() {
