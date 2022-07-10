@@ -1,9 +1,9 @@
 import axios from '../config/backendConfig';
 
-function sendProducts(token, paymentId, ...cart) {
+function sendProducts(token, paymentId, addressId, ...cart) {
     console.log(cart)
     return axios.post('/cart/' + token, {
-        paymentId: paymentId, items: cart
+        paymentId: paymentId, addressId: addressId, items: cart
     }).then((res) => {
         return res.data;
     });

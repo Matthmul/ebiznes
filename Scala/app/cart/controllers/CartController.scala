@@ -12,7 +12,7 @@ import scala.collection.mutable
 class CartController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   private val cartList = new mutable.ListBuffer[Cart]()
 
-  cartList += Cart(1, 1, "", Array(CartItem(Product(1, "", 1, 1), 1)))
+  cartList += Cart(1, 1, 1, "", Array(CartItem(Product(1, "", 1, 1), 1)))
 
   implicit val productJson: OFormat[Product] = Json.format[Product]
   implicit val cartItemJson: OFormat[CartItem] = Json.format[CartItem]
@@ -58,7 +58,7 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
     productListItem match {
       case Some(newItem) =>
         if (token == null) {
-          val toBeUpdated = Cart(itemId, newItem.paymentId, "", newItem.items)
+          val toBeUpdated = Cart(itemId, newItem.paymentId, newItem.addressId, "", newItem.items)
           cartList.updated(foundItemIndex, toBeUpdated)
           Accepted(Json.toJson(toBeUpdated))
         } else {
@@ -66,7 +66,7 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
           if (session.id == -1) {
             Unauthorized
           } else {
-            val toBeUpdated = Cart(itemId, newItem.paymentId, session.email, newItem.items)
+            val toBeUpdated = Cart(itemId, newItem.paymentId, newItem.addressId, session.email, newItem.items)
             cartList.updated(foundItemIndex, toBeUpdated)
             Accepted(Json.toJson(toBeUpdated))
           }
@@ -90,13 +90,13 @@ class CartController @Inject()(cc: ControllerComponents) extends AbstractControl
       case Some(newItem) =>
         val nextId = cartList.map(_.id).max + 1
         if (token == null) {
-          val toBeAdded = Cart(nextId, newItem.paymentId, "", newItem.items)
+          val toBeAdded = Cart(nextId, newItem.paymentId, newItem.addressId, "", newItem.items)
           cartList += toBeAdded
           Created(Json.toJson(toBeAdded))
         }
         else {
           val session = login.controllers.SessionController.getByToken(token)
-          val toBeAdded = Cart(nextId, newItem.paymentId, session.email, newItem.items)
+          val toBeAdded = Cart(nextId, newItem.paymentId, newItem.addressId, session.email, newItem.items)
           cartList += toBeAdded
           Created(Json.toJson(toBeAdded))
         }

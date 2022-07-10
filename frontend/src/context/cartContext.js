@@ -44,9 +44,9 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
-    const sendProductsInCart = (paymentId) => {
+    const sendProductsInCart = (paymentId, addressId) => {
         if (products.length !== 0)
-            cartHook.sendProducts(cookies.token, paymentId, ...products).then(
+            cartHook.sendProducts(cookies.token, paymentId, addressId, ...products).then(
                 (status) => {
                     console.log(status);
                     products.length = 0

@@ -1,3 +1,3 @@
 package cart.models
 
-case class NewCart(paymentId: Long, items: Array[CartItem])
+case class NewCart(paymentId: Long, addressId: Long, items: Array[CartItem])

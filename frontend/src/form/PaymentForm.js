@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { paymentHook } from "../hooks/paymentHook";
 import { CartContext } from "../context/cartContext";
+import { AddressContext } from "../context/addressContext";
 import FinalizeOrder from "../components/FinalizeOrder";
 import Typography from '@mui/material/Typography';
 
@@ -27,6 +28,7 @@ const CARD_OPTIONS = {
 
 const PaymentForm = () => {
     const { sendProductsInCart } = useContext(CartContext)
+    const { addressId } = useContext(AddressContext)
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
@@ -37,7 +39,7 @@ const PaymentForm = () => {
         paymentHook.sendPayment(values, itemsPrice * 100).then(
             (paymentStatus) => {
                 console.log(paymentStatus);
-                sendProductsInCart(paymentStatus.id)
+                sendProductsInCart(paymentStatus.id, addressId)
                 setSuccess(true)
             },
             () => {

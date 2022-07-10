@@ -1,10 +1,11 @@
 import '../componentsStyles/Delivery.scss';
 import * as React from 'react';
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
 import Typography from '@mui/material/Typography';
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { addressHook } from "../hooks/addressHook";
+import { AddressContext } from "../context/addressContext";
 
 function Error({ errors }) {
     return (
@@ -14,27 +15,17 @@ function Error({ errors }) {
     )
 }
 
-function saveAddress(data) {
-    console.log(data);
-    addressHook.sendAddress(data).then(
-        (status) => {
-            console.log(status);
-        },
-        () => {
-            console.error("Błąd serwera")
-        });
-}
-
 function Delivery() {
     let navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { saveAddress } = useContext(AddressContext)
 
     return (
         <div className="delivery">
             <Typography variant="h4" className='tittle'>Adres dostawy</Typography>
             <form onSubmit={handleSubmit(data => {
                 saveAddress(data);
-                navigate("/payment")
+                navigate("/payment");
             })}>
                 <label>Ulica:</label>
                 <TextField className='input' {...register('street', { required: "Wymagane" })} />
