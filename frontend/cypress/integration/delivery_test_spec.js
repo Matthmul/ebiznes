@@ -13,10 +13,10 @@ describe('Payment', function() {
     });
 
     it('Should have form labels', function() {
-        cy.get("label").eq(1).should('have.text', 'Ulica:');
-        cy.get("label").eq(2).should('have.text', 'Numer domu/mieszkania:');
-        cy.get("label").eq(3).should('have.text', 'Kod pocztowy:');
-        cy.get("label").eq(4).should('have.text', 'Miasto:');
+        cy.get("label").eq(0).should('have.text', 'Ulica:');
+        cy.get("label").eq(1).should('have.text', 'Numer domu/mieszkania:');
+        cy.get("label").eq(2).should('have.text', 'Kod pocztowy:');
+        cy.get("label").eq(3).should('have.text', 'Miasto:');
     });
 
     it('Should contain 4 inputs', function () {
@@ -39,10 +39,10 @@ describe('Payment', function() {
     it('Form should check inputs', function() {
         cy.get('.submitButton').click();
         cy.get('.error').should('have.length', 4);
+        cy.get('.error').eq(0).should('have.text', 'Wymagane');
         cy.get('.error').eq(1).should('have.text', 'Wymagane');
         cy.get('.error').eq(2).should('have.text', 'Wymagane');
-        cy.get('.error').eq(3).should('have.text', 'Wymagane');
-        cy.get('.error').eq(4).should('have.text', 'Wymagane');    
+        cy.get('.error').eq(3).should('have.text', 'Wymagane');    
     });
 
     it('During filling inputs errors should disappear', function() {
