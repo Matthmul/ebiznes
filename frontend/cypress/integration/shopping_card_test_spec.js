@@ -28,6 +28,12 @@ describe('Shopping Card', function () {
         cy.get(".tittle").first().should('have.text', 'Podsumowanie:');
     });
 
+    it('Should be 3 buttons', function () {
+        cy.get(".remove").should('have.length', 1)
+        cy.get(".add").should('have.length', 1)
+        cy.get(".clean").should('have.length', 1)
+    });
+
     it('Button should not be disabled', function () {
         cy.get(".pay").should('have.length', 1)
     });
