@@ -1,7 +1,7 @@
 describe('Payment', function() {
     beforeEach(() => {
         cy.visit('https://the-shop.azurewebsites.net/');
-        cy.wait(5000);
+        cy.wait(8000);
         cy.get(".add-button").first().click();
         cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
         cy.get(".pay").click()

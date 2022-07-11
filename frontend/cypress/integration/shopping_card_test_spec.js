@@ -1,6 +1,7 @@
 describe('Shopping Card Empty', function () {
     beforeEach(() => {
-        cy.visit('https://the-shop.azurewebsites.net/')
+        cy.visit('https://the-shop.azurewebsites.net/');
+        cy.wait(5000);
         cy.get("#root > nav > div > ul > li:nth-child(3) > a").click();
     })
 
