@@ -22,8 +22,8 @@ describe('Product List', function () {
         cy.get('.product').should('have.length', 5);
     })
 
-    it('Should contain 3 normal price elements', function () {
-        cy.get('.price').should('have.length', 3);
+    it('Should contain 5 price elements', function () {
+        cy.get('.price').should('have.length', 5);
     })
 
     it('Should contain 2 sale elements', function () {
@@ -72,29 +72,29 @@ describe('Product List', function () {
         })        
         
         it('Should on click show products in category "Wszystko"', function () {
-            cy.get(".single-category").eq(0).then(element => cy.get('button').click());
+            cy.get(".single-category:nth-child(1) > button").eq(0).click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })   
 
         it('Should on click show products in category "Zupy"', function () {
-            cy.get(".single-category").eq(1).then(element => cy.get('button').click());
+            cy.get(".single-category:nth-child(2) > button").eq(0).click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })   
 
         it('Should on click show products in category "Dania"', function () {
-            cy.get(".single-category").eq(2).then(element => cy.get('button').click());
+            cy.get(".single-category:nth-child(3) > button").eq(0).click();
             cy.get('.description').eq(0).should('have.text','Kimchi');
         })   
 
         it('Should on click show products in category "Napoje"', function () {
-            cy.get(".single-category").eq(3).then(element => cy.get('button').click());
+            cy.get(".single-category:nth-child(4) > button").eq(0).click();
             cy.get('.description').eq(0).should('have.text','Herbata jujuba');
         })
 
         it('Should on click show products in category "Wszystko" after clicking different categories', function () {
-            cy.get(".single-category").eq(1).then(element => cy.get('button').click());
-            cy.get(".single-category").eq(3).then(element => cy.get('button').click());
-            cy.get(".single-category").eq(0).then(element => cy.get('button').click());
+            cy.get(".single-category:nth-child(2) > button").eq(0).click();
+            cy.get(".single-category:nth-child(4) > button").eq(0).click();
+            cy.get(".single-category:nth-child(1) > button").eq(0).click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })
     })
