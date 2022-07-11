@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import PaymentForm from "../form/PaymentForm"
 
 const Payment = () => {
-    const stripeTestPromise = loadStripe(`${process.env.STRIPE_PUBLIC}`);
+    const stripeTestPromise = loadStripe(process.env.STRIPE_PUBLIC);
 
     return (
         <Elements stripe={stripeTestPromise}>
