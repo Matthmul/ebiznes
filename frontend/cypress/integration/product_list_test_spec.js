@@ -72,29 +72,29 @@ describe('Product List', function () {
         })        
         
         it('Should on click show products in category "Wszystko"', function () {
-            cy.get(".single-category:nth-child(1) > button").eq(0).click();
+            cy.get(".single-category:nth-child(1) > button").click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })   
 
         it('Should on click show products in category "Zupy"', function () {
-            cy.get(".single-category:nth-child(2) > button").eq(0).click();
+            cy.get(".single-category:nth-child(2) > button").click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })   
 
         it('Should on click show products in category "Dania"', function () {
-            cy.get(".single-category:nth-child(3) > button").eq(0).click();
+            cy.get(".single-category:nth-child(3) > button").click();
             cy.get('.description').eq(0).should('have.text','Kimchi');
         })   
 
         it('Should on click show products in category "Napoje"', function () {
-            cy.get(".single-category:nth-child(4) > button").eq(0).click();
+            cy.get(".single-category:nth-child(4) > button").click();
             cy.get('.description').eq(0).should('have.text','Herbata jujuba');
         })
 
         it('Should on click show products in category "Wszystko" after clicking different categories', function () {
-            cy.get(".single-category:nth-child(2) > button").eq(0).click();
-            cy.get(".single-category:nth-child(4) > button").eq(0).click();
-            cy.get(".single-category:nth-child(1) > button").eq(0).click();
+            cy.get(".single-category:nth-child(2) > button").click();
+            cy.get(".single-category:nth-child(4) > button").click();
+            cy.get(".single-category:nth-child(1) > button").click();
             cy.get('.description').eq(0).should('have.text','Chińska zupka');
         })
     })
