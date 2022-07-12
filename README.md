@@ -1,4 +1,10 @@
-# ebiznes
+# Ebiznes projekt
+
+## Public site
+
+https://the-shop.azurewebsites.net/
+
+## Sonarcloud
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Matthmul_ebiznes&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Matthmul_ebiznes)
 
@@ -10,9 +16,6 @@
 
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Matthmul_ebiznes&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Matthmul_ebiznes)
 
-# Public site
+## BrowserStack
 
-https://the-shop.azurewebsites.net/
-
-
-[BrowserStack Tests](https://automate.browserstack.com/dashboard/v2/public-build/TnlVdkhadlR6bmlWOHA5TkFtU0twdktRVkJyUnZJY2VKVFNaM1BEY3dBZUcrRWtMYWdFRjczRHNNb0UzQ1FzWGNYb2hhOFFVVEhUSWlTbzJpQ2lTb0E9PS0tTWZ6SlBJcUREVFNoSm9KQXRyeEVlQT09--dc87c8ca46afd60fe10b2efb7a8b6b00bae59135)
+[BrowserStack Tests](https://automate.browserstack.com/dashboard/v2/public-build/cDdkVENZSGpHbE4vQmFSbjdPSDZCMCtkYWVFem1nNTdtMUZCaFJMeW15ZGhVUkFreWxnVVlOMVNkUTBITjlYOU1qZTBZbXNOdkZZNC9FdUliQi9TdGc9PS0tdEJueUpjZGRxNStxQVJuTGl6VUo4UT09--1d4c6ab32e0a5413f287db2b543e55e77d37edad)
